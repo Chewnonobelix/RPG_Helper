@@ -1,0 +1,12 @@
+[submodule "DiceRoller"]
+	path = DiceRoller
+	url = git@github.com:Chewnonobelix/DiceRoller.git
+[submodule "DesignLibrary"]
+	path = DesignLibrary
+	url = git@github.com:Chewnonobelix/DesignLibrary.git
+[submodule "ExpressionLibrary"]
+	path = ExpressionLibrary
+	url = git@github.com:Chewnonobelix/ExpressionLibrary.git
+[submodule "GraphLibrary"]
+	path = GraphLibrary
+	url = git@github.com:Chewnonobelix/GraphLibrary.git
