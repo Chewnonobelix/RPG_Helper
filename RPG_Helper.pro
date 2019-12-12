@@ -3,6 +3,6 @@ TEMPLATE = subdirs
 SUBDIRS = \
 GraphLibrary \
 DesignLibrary \
-#ExpressionLibrary \
+ExpressionLibrary \
 DiceRoller \
 
