@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "dice.h"
 
 int main(int argc, char *argv[])
 {
@@ -17,5 +18,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
     engine.load(url);
     
+    Dice d;
+
     return app.exec();
 }

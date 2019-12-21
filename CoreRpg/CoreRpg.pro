@@ -34,3 +34,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpresssion
 INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
+
+DEPENDPATH += -L$${OUT_PWD}/../DiceRoller/Dice -lDice
