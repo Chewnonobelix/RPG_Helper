@@ -1,4 +1,4 @@
-QT += quick
+QT += quick core xml widgets gui
 
 CONFIG += c++17
 
@@ -16,7 +16,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES +=
 
 TRANSLATIONS += \
     CoreRpg_en_150.ts
@@ -32,12 +32,10 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpression/Core $${PWD}/../ExpressionLibrary/LibExpression/Operation
-INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
+include(../config.pro)
 
-DEPENDPATH += $$OUT_PWD/../DiceRoller/Dice $${OUT_PWD}/../GraphLibrary/GraphLib $${OUT_PWD}/../ExpressionLibrary/LibExpression $${OUT_PWD}/../DesignLibrary/DesignPattern
+INCLUDEPATH += $$PWD/../RpgDll
+DEPENDPATH += $$OUT_PWD/../RpgDll
+LIBS += -L$$OUT_PWD/../RpgDll -lRpgDll
 
-LIBS += -L$$OUT_PWD/../DiceRoller/Dice -lDice
-LIBS += -L$$OUT_PWD/../GraphLibrary/GraphLib -lGraph
-LIBS += -L$$OUT_PWD/../ExpressionLibrary/LibExpression -lLibExpression
-LIBS += -L$$OUT_PWD/../DesignLibrary/DesignPattern -lDesignPattern
+message($$LIBS)

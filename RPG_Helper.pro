@@ -6,5 +6,6 @@ DesignLibrary \
 ExpressionLibrary \
 DiceRoller \
 CoreRpg \
+RpgDll \
 
 
