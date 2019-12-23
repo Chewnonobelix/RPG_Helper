@@ -1,0 +1,12 @@
+#ifndef GAMEMASTER_GLOBAL_H
+#define GAMEMASTER_GLOBAL_H
+
+#include <QtCore/qglobal.h>
+
+#if defined(GAMEMASTER_LIBRARY)
+#  define GAMEMASTER_EXPORT Q_DECL_EXPORT
+#else
+#  define GAMEMASTER_EXPORT Q_DECL_IMPORT
+#endif
+
+#endif // GAMEMASTER_GLOBAL_H
