@@ -1,5 +1,7 @@
 TEMPLATE = subdirs
 
-SUBDIRS += \ \
+CONFIG += ordered
+
+SUBDIRS += \
     Bestiary \
     GameMaster

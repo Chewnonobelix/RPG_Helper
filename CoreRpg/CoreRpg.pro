@@ -1,7 +1,3 @@
-QT += quick core xml widgets gui
-
-CONFIG += c++17
-
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Refer to the documentation for the
@@ -34,8 +30,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 include(../config.pro)
 
-INCLUDEPATH += $$PWD/../RpgDll
-DEPENDPATH += $$OUT_PWD/../RpgDll
-LIBS += -L$$OUT_PWD/../RpgDll -lRpgDll
-
-message($$LIBS)
+INCLUDEPATH += $$PWD/../RpgDll/GameMaster
+DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
+LIBS += -L$$OUT_PWD/../RpgDll/GameMaster -lGameMaster

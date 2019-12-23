@@ -1,11 +1,13 @@
 TEMPLATE = subdirs
 
+CONFIG += ordered
+
 SUBDIRS = \
 GraphLibrary \
 DesignLibrary \
 ExpressionLibrary \
 DiceRoller \
-CoreRpg \
 RpgDll \
+CoreRpg \
 
 
