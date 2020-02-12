@@ -24,6 +24,7 @@ QString AbstractObject::name() const
 void AbstractObject::setName(const QString &name)
 {
     m_name = name;
+    emit s_name(m_name);
 }
 
 bool AbstractObject::operator <(const AbstractObject& ao) const

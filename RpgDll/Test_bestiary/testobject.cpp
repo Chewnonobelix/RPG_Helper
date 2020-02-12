@@ -26,18 +26,20 @@ void TestObject::testCopy()
 
 void TestObject::testName() 
 {
-    QVERIFY2(name() == name1, "Test getter");
+    QCOMPARE(name(), name1);
 }
 
 void TestObject::testSetName() 
 {
+    QSignalSpy spy(this, SIGNAL(s_name(QString)));
+    
     setName(name1);
-    QVERIFY(true);
+    QCOMPARE(spy.count(), 1);
 }
 
 void TestObject::testEquality() 
 {
-    QVERIFY2(*this == *copy, "Test equality");
+    QCOMPARE(*this, *copy);
 }
 
 void TestObject::testInferior() 

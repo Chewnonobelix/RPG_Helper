@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QTest>
-
+#include <QSignalSpy>
 #include "abstractobject.h"
 
 
