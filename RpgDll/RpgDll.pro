@@ -4,4 +4,5 @@ CONFIG += ordered
 
 SUBDIRS += \
     Bestiary \
-    GameMaster
+    GameMaster \
+    Test_bestiary

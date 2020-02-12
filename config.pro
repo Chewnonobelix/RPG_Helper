@@ -16,7 +16,7 @@ LIBS += -L$$OUT_PWD/../DesignLibrary/DesignPattern -lDesignPattern
 
 
 
-
+#Pour les dll
 
 INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpression/Core $${PWD}/../ExpressionLibrary/LibExpression/Operation
 INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
