@@ -2,24 +2,31 @@
 #define TESTOBJECT_H
 
 #include <QObject>
+#include <QTest>
 
-class TestObject : public QObject
+#include "abstractobject.h"
+
+
+class TestObject : public AbstractObject
 {
     Q_OBJECT
 public:
-    explicit TestObject(QObject *parent = nullptr);
+    explicit TestObject();
+    TestObject(const TestObject&);
+    ~TestObject();
+    QSharedPointer<TestObject> copy;
     
 signals:
     
-public slots:
+private slots:
     void initTestCase();
     void cleanupTestCase();
-
-    void copy();
-    void getName();
-    void setName();
-    void compare();
-    void equality();    
+    
+    void testSetName();
+    void testName();
+    void testCopy();
+    void testEquality();    
+    void testInferior();    
 };
 
 #endif // TESTOBJECT_H
