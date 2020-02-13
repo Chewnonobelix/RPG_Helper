@@ -17,14 +17,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    abstractobject.cpp
+    abstractobject.cpp \
+    abstractweapon.cpp
 
 HEADERS += \
     Bestiary_global.h \
-    abstractobject.h
+    abstractobject.h \
+    abstractweapon.h
 
 # Default rules for deployment.
 unix {
     target.path = /usr/lib
 }
 !isEmpty(target.path): INSTALLS += target
+
+include(../../config.pro)
