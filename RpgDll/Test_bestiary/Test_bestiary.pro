@@ -10,10 +10,12 @@ TEMPLATE = app
 
 SOURCES += \
     main.cpp \
-    testobject.cpp
+    testobject.cpp \
+    testweapon.cpp
 
 HEADERS += \
-    testobject.h
+    testobject.h \
+    testweapon.h
 
 INCLUDEPATH = $$PWD\..\Bestiary
 DEPENDPATH = $$OUT_PWD\..\Bestiary
