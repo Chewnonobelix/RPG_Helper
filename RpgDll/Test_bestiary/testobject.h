@@ -10,11 +10,13 @@
 class TestObject : public AbstractObject
 {
     Q_OBJECT
+private:
+    QSharedPointer<TestObject> copy;
+    
 public:
     explicit TestObject();
     TestObject(const TestObject&);
     ~TestObject();
-    QSharedPointer<TestObject> copy;
     
 signals:
     
