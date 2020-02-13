@@ -5,6 +5,7 @@
 #include <QTest>
 
 #include "abstractcreature.h"
+#include "designpattern.h"
 
 class TestCreature: public AbstractCreature
 {

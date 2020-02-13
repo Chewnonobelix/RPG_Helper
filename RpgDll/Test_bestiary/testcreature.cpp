@@ -1,5 +1,7 @@
 #include "testcreature.h"
 
+using namespace DesignPattern;
+
 const QString name1 = "Test name1";
 const QString name2 = "Test name2";
 const QString race1 = "Test race1";
@@ -83,7 +85,7 @@ void TestCreature::testCharacteristicsList()
 
 void TestCreature::testCopy() 
 {
-    copy = QSharedPointer<TestCreature>::create(*this);
+    copy = factory<TestCreature>(*this);
     QVERIFY2(!copy.isNull(), "Test copy");    
     copy->setName(name2);
 }

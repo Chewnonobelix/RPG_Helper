@@ -5,7 +5,7 @@
 #include <QTest>
 #include <QSignalSpy>
 #include "abstractobject.h"
-
+#include "designpattern.h"
 
 class TestObject : public AbstractObject
 {

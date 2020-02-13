@@ -5,6 +5,7 @@
 #include <QSignalSpy>
 #include "abstractweapon.h"
 #include "testobject.h"
+#include "designpattern.h"
 
 class TestWeapon: public AbstractWeapon
 {

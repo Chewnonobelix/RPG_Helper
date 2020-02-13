@@ -1,5 +1,7 @@
 #include "testweapon.h"
 
+using namespace DesignPattern;
+
 const QString damage1 = "1D10";
 const QString damage2 = "2D10";
 const QString name1 = "Test object1";
@@ -32,7 +34,7 @@ void TestWeapon::testDamage()
 
 void TestWeapon::testCopy()
 {
-    copy = QSharedPointer<TestWeapon>::create(*this);
+    copy = factory<TestWeapon>(*this);
     QVERIFY2(!copy.isNull(), "Test copy");
 }
 

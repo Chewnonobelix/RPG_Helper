@@ -1,5 +1,7 @@
 #include "testobject.h"
 
+using namespace DesignPattern;
+
 const QString name1 = "Test Object 1";
 const QString name2 = "Test Object 2";
 
@@ -20,7 +22,7 @@ void TestObject::cleanupTestCase() {}
 
 void TestObject::testCopy() 
 {
-    copy = QSharedPointer<TestObject>::create(*this);
+    copy = factory<TestObject>(*this);
     QVERIFY2(!copy.isNull(), "Test copy");
 }
 
