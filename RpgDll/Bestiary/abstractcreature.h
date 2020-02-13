@@ -2,6 +2,7 @@
 #define ABSTRACTCREATURE_H
 
 #include <QObject>
+#include <QSet>
 #include "metadata.h"
 #include "Bestiary_global.h"
 
@@ -15,6 +16,7 @@ class BESTIARY_EXPORT AbstractCreature: public QObject, private MetaData
     Q_PROPERTY(QStringList characteristicsList READ characteristicsList CONSTANT)
     
 protected:
+    static QSet<QString> uncharacteristic;
     
 public:
     AbstractCreature();
