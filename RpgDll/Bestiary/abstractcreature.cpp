@@ -8,6 +8,9 @@ AbstractCreature::AbstractCreature()
 AbstractCreature::AbstractCreature(const AbstractCreature&): QObject(nullptr), MetaData()
 {}
 
+AbstractCreature::~AbstractCreature()
+{}
+
 AbstractCreature& AbstractCreature::operator = (const AbstractCreature&)
 {
     return *this;

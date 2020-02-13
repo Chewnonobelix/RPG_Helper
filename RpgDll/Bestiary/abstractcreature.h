@@ -3,8 +3,9 @@
 
 #include <QObject>
 #include "metadata.h"
+#include "Bestiary_global.h"
 
-class AbstractCreature: public QObject, private MetaData
+class BESTIARY_EXPORT AbstractCreature: public QObject, private MetaData
 {
     Q_OBJECT
     
@@ -18,7 +19,7 @@ protected:
 public:
     AbstractCreature();
     AbstractCreature(const AbstractCreature&);
-    ~AbstractCreature() = 0;
+    virtual ~AbstractCreature() = 0;
     
     virtual AbstractCreature& operator = (const AbstractCreature&);
     virtual bool operator == (const AbstractCreature&) const;

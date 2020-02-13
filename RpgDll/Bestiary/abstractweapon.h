@@ -3,7 +3,7 @@
 
 #include "abstractobject.h"
 
-class AbstractWeapon : public AbstractObject
+class BESTIARY_EXPORT AbstractWeapon : public AbstractObject
 {
     Q_OBJECT
     

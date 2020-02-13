@@ -5,7 +5,9 @@
 #include <typeinfo>
 #include <QDebug>
 
-class AbstractObject: public QObject
+#include "Bestiary_global.h"
+
+class BESTIARY_EXPORT AbstractObject: public QObject
 {
     Q_OBJECT
     
