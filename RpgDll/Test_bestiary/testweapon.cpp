@@ -2,6 +2,7 @@
 
 const QString damage1 = "1D10";
 const QString damage2 = "2D10";
+const QString name1 = "Test object1";
 
 TestWeapon::TestWeapon()
 {
@@ -45,4 +46,13 @@ void TestWeapon::testInferior()
     copy->setDamage(damage2);
     
     QCOMPARE(*this < *copy, true);
+}
+
+void TestWeapon::testDifferentType()
+{
+    TestObject o;
+    o.setName(name1);
+    setName(name1);
+    
+    QCOMPARE(*this == o, false);
 }

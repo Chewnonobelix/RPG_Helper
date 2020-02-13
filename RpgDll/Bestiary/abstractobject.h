@@ -2,6 +2,8 @@
 #define ABSTRACTOBJECT_H
 
 #include <QObject>
+#include <typeinfo>
+#include <QDebug>
 
 class AbstractObject: public QObject
 {

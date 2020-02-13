@@ -20,3 +20,5 @@ HEADERS += \
 INCLUDEPATH = $$PWD\..\Bestiary
 DEPENDPATH = $$OUT_PWD\..\Bestiary
 LIBS = -L$$OUT_PWD\..\Bestiary -lBestiary
+
+include(../../config.pro)

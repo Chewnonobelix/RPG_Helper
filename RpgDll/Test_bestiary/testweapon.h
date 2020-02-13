@@ -4,6 +4,7 @@
 #include <QTest>
 #include <QSignalSpy>
 #include "abstractweapon.h"
+#include "testobject.h"
 
 class TestWeapon: public AbstractWeapon
 {
@@ -24,6 +25,7 @@ private slots:
     void testCopy();
     void testEquality();    
     void testInferior();    
+    void testDifferentType();
     
 };
 
