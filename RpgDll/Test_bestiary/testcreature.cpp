@@ -8,6 +8,7 @@ const QString race1 = "Test race1";
 const QString race2 = "Test race2";
 const QString description1 = "Test description1";
 const QString description2 = "Test description2";
+const QString object1 = "Test object1";
 
 const QString characName = "C1";
 constexpr double characValue = 1;
@@ -100,12 +101,25 @@ void TestCreature::testInferior()
     QCOMPARE(*this < *copy, true);
 }
 
-void TestCreature::testObject()
+void TestCreature::testSetItem()
 {
-    QSKIP("TODO");
+    QSignalSpy spy(this, SIGNAL(s_object(QString,ObjectPointer)));
+    auto item = factory<TestObject>();
+    setItem("Test object", item);
+    item->setName(object1);
+    cso<<item;
+    QCOMPARE(spy.count(), 1);
 }
 
-void TestCreature::testWeapons() 
+void TestCreature::testItem()
 {
-    QSKIP("TODO");
+    QSet<ObjectPointer> sto = itemSet("Test object");   
+    
+    QCOMPARE(sto, cso);
 }
+
+void TestCreature::testItemList()
+{
+    QCOMPARE(itemTypeList(), QStringList("Test object"));
+}
+

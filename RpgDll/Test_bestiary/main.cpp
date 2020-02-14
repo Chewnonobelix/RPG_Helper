@@ -6,11 +6,15 @@
 #include "testweapon.h"
 #include "testcreature.h"
 
+
 int main(int argc, char** argv)
 {
     QApplication app(argc, argv);
     int status = 0;
-
+    
+    qRegisterMetaType<ObjectPointer>("ObjectPointer");
+    qRegisterMetaType<WeaponPointer>("WeaponPointer");
+    qRegisterMetaType<CreaturePointer>("CreaturePointer");
     //Tools unit test
     TestObject to;
     TestWeapon tw;

@@ -6,6 +6,7 @@
 
 #include "abstractcreature.h"
 #include "designpattern.h"
+#include "testobject.h"
 
 class TestCreature: public AbstractCreature
 {
@@ -18,6 +19,7 @@ public:
     explicit TestCreature();
     TestCreature(const TestCreature&);
     ~TestCreature();
+    QSet<ObjectPointer> cso;
     
 private slots:
     void initTestCase();
@@ -35,9 +37,10 @@ private slots:
     void testCopy();
     void testEquality();
     void testInferior();
-    void testObject();
-    void testWeapons();
-    
+
+    void testSetItem();
+    void testItem();
+    void testItemList();
 };
 
 #endif // TESTCREATURE_H
