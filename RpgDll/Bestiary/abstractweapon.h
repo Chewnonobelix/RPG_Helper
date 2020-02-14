@@ -27,4 +27,6 @@ signals:
     void s_damage(QString);
 };
 
+typedef QSharedPointer<AbstractWeapon> WeaponPointer;
+
 #endif // ABSTRACTWEAPON_H

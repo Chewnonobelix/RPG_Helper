@@ -33,5 +33,5 @@ signals:
     void s_name(QString);
 };
 
-
+typedef QSharedPointer<AbstractObject> ObjectPointer;
 #endif // ABSTRACTOBJECT_H

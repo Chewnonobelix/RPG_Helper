@@ -90,3 +90,16 @@ void AbstractCreature::setCharacteristics(QString name, double value)
         emit s_characteristics(name, characteristics(name));
     }
 }
+
+QStringList AbstractCreature::itemTypeList() const
+{
+    return QStringList();
+}
+
+QSet<ObjectPointer> AbstractCreature::itemSet(QString) const
+{
+    return QSet<ObjectPointer>();    
+}
+
+void AbstractCreature::setItem(QString, ObjectPointer)
+{}

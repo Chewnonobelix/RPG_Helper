@@ -5,6 +5,7 @@
 #include <QSet>
 #include "metadata.h"
 #include "Bestiary_global.h"
+#include "abstractweapon.h"
 
 class BESTIARY_EXPORT AbstractCreature: public QObject, private MetaData
 {
@@ -33,15 +34,23 @@ public:
     void setRace(QString);
     QString description() const;
     void setDescription(QString);
+    
     QStringList characteristicsList() const;
     double characteristics(QString);
     void setCharacteristics(QString, double);
+    
+    QStringList itemTypeList() const;
+    QSet<ObjectPointer> itemSet(QString) const;
+    void setItem(QString, ObjectPointer);
     
 signals:
      void s_name(QString);
      void s_race(QString);
      void s_description(QString);
      void s_characteristics(QString, double);
+     void s_object(QString, ObjectPointer);
 };
+
+typedef QSharedPointer<AbstractCreature> CreaturePointer;
 
 #endif // ABSTRACTCREATURE_H
