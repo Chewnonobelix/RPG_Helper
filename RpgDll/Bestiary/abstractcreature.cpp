@@ -93,13 +93,23 @@ void AbstractCreature::setCharacteristics(QString name, double value)
 
 QStringList AbstractCreature::itemTypeList() const
 {
-    return QStringList();
+    auto map = metaData<QVariant>("item").toMap();
+    
+    return map.keys();
 }
 
-QSet<ObjectPointer> AbstractCreature::itemSet(QString) const
+QSet<ObjectPointer> AbstractCreature::itemSet(QString name) const
 {
-    return QSet<ObjectPointer>();    
+    auto map = metaData<QVariant>("item").toMap();
+    return map[name].value<QSet<ObjectPointer>>();    
 }
 
-void AbstractCreature::setItem(QString, ObjectPointer)
-{}
+void AbstractCreature::setItem(QString name, ObjectPointer obj)
+{
+    auto map = metaData<QVariant>("item").toMap();
+    auto set = map[name].value<QSet<ObjectPointer>>();
+    set<<obj;
+    map[name] = QVariant::fromValue(set);
+    setMetadata("item", map);
+    emit s_object(name, obj);
+}
