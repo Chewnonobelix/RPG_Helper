@@ -10,11 +10,13 @@ TEMPLATE = app
 
 SOURCES += \
     main.cpp \
+    testbonus.cpp \
     testcreature.cpp \
     testobject.cpp \
     testweapon.cpp
 
 HEADERS += \
+    testbonus.h \
     testcreature.h \
     testobject.h \
     testweapon.h

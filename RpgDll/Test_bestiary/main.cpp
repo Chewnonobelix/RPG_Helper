@@ -5,7 +5,7 @@
 #include "testobject.h"
 #include "testweapon.h"
 #include "testcreature.h"
-
+#include "testbonus.h"
 
 int main(int argc, char** argv)
 {
@@ -18,11 +18,13 @@ int main(int argc, char** argv)
     //Tools unit test
     TestObject to;
     TestWeapon tw;
+    TestBonus tb;
     TestCreature tc;
     
     
     status |= QTest::qExec(&to, argc, argv);
     status |= QTest::qExec(&tw, argc, argv);
+    status |= QTest::qExec(&tb, argc, argv);
     status |= QTest::qExec(&tc, argc, argv);
     
     return status;
