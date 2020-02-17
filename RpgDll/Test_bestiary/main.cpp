@@ -15,6 +15,7 @@ int main(int argc, char** argv)
     qRegisterMetaType<ObjectPointer>("ObjectPointer");
     qRegisterMetaType<WeaponPointer>("WeaponPointer");
     qRegisterMetaType<CreaturePointer>("CreaturePointer");
+    qRegisterMetaType<BonusPointer>("BonusPointer");
     //Tools unit test
     TestObject to;
     TestWeapon tw;

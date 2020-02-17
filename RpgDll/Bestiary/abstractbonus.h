@@ -32,4 +32,5 @@ signals:
     void s_description(QString);
 };
 
+typedef QSharedPointer<AbstractBonus> BonusPointer;
 #endif // ABSRACTBONUS_H
