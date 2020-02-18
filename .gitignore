@@ -12,3 +12,7 @@ build-Graph-Desktop_Qt_5_13_1_MinGW_64_bit-Debug/
 build-LibExpression-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/debug/
 
 build-LibExpression-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
+
+*.lck
+
+*.bak_000f
