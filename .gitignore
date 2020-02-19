@@ -15,4 +15,4 @@ build-LibExpression-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
 
 *.lck
 
-*.bak_000f
+*.bak*
