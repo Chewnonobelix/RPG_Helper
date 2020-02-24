@@ -7,7 +7,7 @@
 #include "Bestiary_global.h"
 #include "abstractweapon.h"
 
-class BESTIARY_EXPORT AbstractCreature: public QObject, private MetaData
+class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
 {
     Q_OBJECT
     
