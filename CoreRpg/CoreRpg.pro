@@ -17,6 +17,10 @@ RESOURCES +=
 TRANSLATIONS += \
     CoreRpg_en_150.ts
 
+CONFIG += c++17
+
+QT += core widgets quick xml gui
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
@@ -28,8 +32,17 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-include(../config.pro)
-
 INCLUDEPATH += $$PWD/../RpgDll/GameMaster
-DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
-LIBS += -L$$OUT_PWD/../RpgDll/GameMaster -lGameMaster
+#DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
+LIBS += -L$$OUT_PWD/../RpgDll/GameMaster/debug -lGameMaster
+
+INCLUDEPATH += $${PWD}/DesignLibrary/DesignPattern $${PWD}/DiceRoller/Dice $${PWD}/ExpressionLibrary/LibExpression/Core $${PWD}/ExpressionLibrary/LibExpression/Operation
+INCLUDEPATH += $${PWD}/GraphLibrary/GraphLib
+
+#DEPENDPATH += $$OUT_PWD/../DiceRoller/Dice $${OUT_PWD}/../GraphLibrary/GraphLib $${OUT_PWD}/../ExpressionLibrary/LibExpression $${OUT_PWD}/../DesignLibrary/DesignPattern
+
+LIBS += -L$$OUT_PWD/../DiceRoller/Dice/debug -lDice
+LIBS += -L$$OUT_PWD/../GraphLibrary/GraphLib/debug -lGraph
+LIBS += -L$$OUT_PWD/../ExpressionLibrary/LibExpression/debug -lLibExpression
+LIBS += -L$$OUT_PWD/../DesignLibrary/DesignPattern/debug -lDesignPattern
+

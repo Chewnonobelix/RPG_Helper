@@ -11,3 +11,5 @@ RpgDll \
 CoreRpg \
 
 
+CoreRpg.depends = RpgDll
+RpgDll.depends = GraphLibrary DesignLibrary ExpressionLibrary
