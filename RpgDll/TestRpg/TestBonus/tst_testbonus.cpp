@@ -9,6 +9,7 @@ class TestBonus : public AbstractBonus
 private:
     const QString name1 = "name1";
     const QString description1 = "description1";
+    QSharedPointer<AbstractBonus> copy;
 
 public:
     TestBonus();
@@ -17,6 +18,9 @@ public:
 private slots:
     void test_name();
     void test_description();
+    void test_copy_consttructor();
+    void test_equality();
+    void test_inferior();
 };
 
 TestBonus::TestBonus()
@@ -46,6 +50,25 @@ void TestBonus::test_description()
     QCOMPARE(this->description(), description1);
     QCOMPARE(spy.count(), 1);
 }
+
+void TestBonus::test_copy_consttructor()
+{
+    QVERIFY(copy.isNull());
+    copy = QSharedPointer<TestBonus>::create(*this);
+    QCOMPARE(copy->name(), name1);
+}
+
+void TestBonus::test_equality()
+{
+    QCOMPARE(*this, *copy);
+}
+
+void TestBonus::test_inferior()
+{
+    copy->setDescription(description1+"1");
+    QCOMPARE(*this < *copy, true);
+}
+
 
 QTEST_APPLESS_MAIN(TestBonus)
 
