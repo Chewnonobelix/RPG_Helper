@@ -5,56 +5,65 @@ AbstractPc::AbstractPc(const AbstractPc& pc) : QObject(), MetaData(pc)
 
 int AbstractPc::level() const
 {
-    return 0;
+    return metaData<int>("level");
 }
 
-void AbstractPc::setLevel(int)
+void AbstractPc::setLevel(int l)
 {
-
+    setMetadata("level", l);
+    emit s_level(l);
 }
 
 double AbstractPc::currentXp() const
 {
-    return 0;
+    return metaData<double>("currentXp");
 }
 
-void AbstractPc::setCurrentXp(double)
+void AbstractPc::setCurrentXp(double c)
 {
-
+    setMetadata("currentXp", c);
+    emit s_currentXp(c);
 }
 
 double AbstractPc::targetXp() const
 {
-    return 0;
+    return metaData<double>("targetXp");
 }
 
-void AbstractPc::setTargetXp(double)
+void AbstractPc::setTargetXp(double t)
 {
-
+    setMetadata("targetXp", t);
+    emit s_targetXp(t);
 }
 
 QStringList AbstractPc::classes() const
 {
-    return QStringList();
+    return metaData<QStringList>("classes");
 }
 
-void AbstractPc::setClasses(QStringList)
+void AbstractPc::setClasses(QStringList c)
 {
-
+    setMetadata("classes", c);
+    emit s_classes(c);
 }
 
-bool AbstractPc::operator ==(const AbstractPc&) const
+bool AbstractPc::operator ==(const AbstractPc& pc) const
 {
-    return false;
+    return classes() == pc.classes() &&
+        level() == pc.level() &&
+        targetXp() == pc.targetXp() &&
+        currentXp() == pc.currentXp();
 }
 
-bool AbstractPc::operator < (const AbstractPc&) const
+bool AbstractPc::operator < (const AbstractPc& pc) const
 {
-    return false;
+    return classes() == pc.classes() &&
+           level() < pc.level();
 }
 
-AbstractPc& AbstractPc::operator = (const AbstractPc&)
+AbstractPc& AbstractPc::operator = (const AbstractPc& pc)
 {
+    (MetaData&)*this = pc;
     return *this;
 }
 
