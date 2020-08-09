@@ -4,4 +4,5 @@ SUBDIRS += \
     TestBonus \
     TestCreature \
     TestItem \
+    TestPc \
     TestWeapon
