@@ -35,4 +35,4 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
-include(../../config.pro)
+include(../config.pro)

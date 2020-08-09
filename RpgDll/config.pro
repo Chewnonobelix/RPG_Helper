@@ -1,7 +1,7 @@
 #Pour les dll
 
-INCLUDEPATH += $${PWD}/../../DesignLibrary/DesignPattern $${PWD}/../../DiceRoller/Dice $${PWD}/../../ExpressionLibrary/LibExpression/Core $${PWD}/../../ExpressionLibrary/LibExpression/Operation
-INCLUDEPATH += $${PWD}/../../GraphLibrary/GraphLib
+INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpression/Core $${PWD}/../../ExpressionLibrary/LibExpression/Operation
+INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
 
 #DEPENDPATH += $$OUT_PWD/../../DiceRoller/Dice $${OUT_PWD}/../../GraphLibrary/GraphLib $${OUT_PWD}/../../ExpressionLibrary/LibExpression $${OUT_PWD}/../../DesignLibrary/DesignPattern
 
