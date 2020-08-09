@@ -20,6 +20,7 @@ SOURCES += \
     abstractbonus.cpp \
     abstractcreature.cpp \
     abstractobject.cpp \
+    abstractpc.cpp \
     abstractweapon.cpp
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     abstractbonus.h \
     abstractcreature.h \
     abstractobject.h \
+    abstractpc.h \
     abstractweapon.h
 
 # Default rules for deployment.
