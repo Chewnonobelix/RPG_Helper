@@ -113,3 +113,18 @@ void AbstractCreature::setItem(QString name, ObjectPointer obj)
     setMetadata("item", map);
     emit s_object(name, obj);
 }
+
+QStringList AbstractCreature::ruleTypeList() const
+{
+    return QStringList();
+}
+
+QSet<BonusPointer> AbstractCreature::ruleSet(QString) const
+{
+    return QSet<BonusPointer>();
+}
+
+void AbstractCreature::setRule(QString, BonusPointer)
+{
+
+}
