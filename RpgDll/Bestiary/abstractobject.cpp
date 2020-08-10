@@ -34,11 +34,11 @@ bool AbstractObject::operator <(const AbstractObject& ao) const
 
 bool AbstractObject::operator ==(const AbstractObject& ao) const
 {
-    return name() == ao.name();
+    return id() == ao.id();
 }
 
 AbstractObject& AbstractObject::operator =(const AbstractObject& ao)
 {
-    setName(ao.name());
+    MetaData::operator =(ao);
     return *this;
 }
