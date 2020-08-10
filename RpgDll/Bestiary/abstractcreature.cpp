@@ -118,15 +118,23 @@ void AbstractCreature::setItem(QString name, ObjectPointer obj)
 
 QStringList AbstractCreature::ruleTypeList() const
 {
-    return QStringList();
+    auto map = metaData<QVariant>("rule").toMap();
+    
+    return map.keys();
 }
 
-QSet<BonusPointer> AbstractCreature::ruleSet(QString) const
+QSet<BonusPointer> AbstractCreature::ruleSet(QString name) const
 {
-    return QSet<BonusPointer>();
+    auto map = metaData<QVariant>("rule").toMap();
+    return map[name].value<QSet<BonusPointer>>();    
 }
 
-void AbstractCreature::setRule(QString, BonusPointer)
+void AbstractCreature::setRule(QString name, BonusPointer obj)
 {
-
+    auto map = metaData<QVariant>("rule").toMap();
+    auto set = map[name].value<QSet<BonusPointer>>();
+    set<<obj;
+    map[name] = QVariant::fromValue(set);
+    setMetadata("rule", map);
+    emit s_rule(name, obj);
 }
