@@ -10,6 +10,7 @@ class TestCreature : public AbstractCreature
 {
     Q_OBJECT
 private:
+	const QUuid id1 = QUuid::createUuid();
     const QString name1 = "name1";
     const QString description1 = "description1";
     const QString caracteriticName1 = "c1";
@@ -28,7 +29,8 @@ public:
     ~TestCreature();
 
 private slots:
-    void test_name();
+    void test_id();
+	void test_name();
     void test_description();
     void test_race();
     void test_caracteristic();
@@ -49,6 +51,14 @@ TestCreature::~TestCreature()
 {
 
 }
+
+void TestCreature::test_id()
+{
+	QVERIFY(id().isNull());
+	setId(id1);
+	QCOMPARE(id(), id1);
+}
+
 
 void TestCreature::test_name()
 {
@@ -121,7 +131,7 @@ void TestCreature::test_equality()
 
 void TestCreature::test_inferior()
 {
-    copy->setDescription(description1+"1");
+    copy->setName(name1+"1");
     QCOMPARE(*this < *copy, true);
 }
 

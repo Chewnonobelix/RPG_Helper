@@ -8,6 +8,7 @@ class TestItem : public AbstractObject
     Q_OBJECT
 private:
     const QString name1 = "name1";
+	const QUuid id1 = QUuid::createUuid();
     QSharedPointer<AbstractObject> copy;
 
 public:
@@ -15,6 +16,7 @@ public:
     ~TestItem();
 
 private slots:
+    void test_id();
     void test_name();
     void test_copy_consttructor();
     void test_equality();
@@ -29,6 +31,13 @@ TestItem::TestItem()
 TestItem::~TestItem()
 {
 
+}
+
+void TestItem::test_id()
+{
+	QVERIFY(id().isNull());
+	setId(id1);
+	QCOMPARE(id(), id1);
 }
 
 void TestItem::test_name()
