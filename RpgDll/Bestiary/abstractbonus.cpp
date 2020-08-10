@@ -18,19 +18,15 @@ AbstractBonus& AbstractBonus::operator =(const AbstractBonus& ab)
 }
 
 bool AbstractBonus::operator ==(const AbstractBonus& ab) const 
-{
-    bool ret = true;
-    
-    for(auto it: metadataList())
-        ret &= metaData<QVariant>(it) == ab.metaData<QVariant>(it);
-    
-    return ret;
+{    
+    return id() == ab.id();
 }
 
 bool AbstractBonus::operator <(const AbstractBonus& ab) const
-{
-    bool ret = false;
-    
+{   
+    return name() < ab.name();
+}
+
 QUuid AbstractBonus::id() const
 {
 	return metaData<QUuid>("id");
