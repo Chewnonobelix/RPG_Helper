@@ -15,7 +15,7 @@ class BESTIARY_EXPORT AbstractPc : public QObject, protected MetaData
     Q_PROPERTY(double targetXp READ targetXp WRITE setTargetXp NOTIFY s_targetXp)
 
 public:
-    AbstractPc() = default;
+    AbstractPc();
     AbstractPc(const AbstractPc&);
     ~AbstractPc() = default;
 

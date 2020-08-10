@@ -1,5 +1,13 @@
 #include "abstractpc.h"
 
+AbstractPc::AbstractPc() : QObject(), MetaData()
+{
+        setClasses(QStringList());
+	setLevel(0);
+	setCurrentXp(0);
+	setTargetXp(0);
+}
+
 AbstractPc::AbstractPc(const AbstractPc& pc) : QObject(), MetaData(pc)
 {}
 
