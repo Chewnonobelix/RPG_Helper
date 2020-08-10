@@ -4,17 +4,17 @@
 #include <QObject>
 #include <typeinfo>
 #include <QDebug>
+#include "metadata.h"
 
 #include "Bestiary_global.h"
 
-class BESTIARY_EXPORT AbstractObject: public QObject
+class BESTIARY_EXPORT AbstractObject: public QObject, protected MetaData
 {
     Q_OBJECT
     
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
     
 private:
-    QString m_name;
     
 public:
     AbstractObject();

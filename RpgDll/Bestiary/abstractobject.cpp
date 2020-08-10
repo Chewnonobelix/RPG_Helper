@@ -3,10 +3,11 @@
 
 AbstractObject::AbstractObject(): QObject(nullptr)
 {
-    
+	setId(QUuid());
+	setName(QString());
 }
 
-AbstractObject::AbstractObject(const AbstractObject& ao): QObject(nullptr), m_name(ao.name())
+AbstractObject::AbstractObject(const AbstractObject& ao): QObject(nullptr), MetaData(ao)
 {
     
 }
@@ -18,13 +19,13 @@ AbstractObject::~AbstractObject()
 
 QString AbstractObject::name() const
 {
-    return m_name;
+    return metaData<QString>("name");
 }
 
 void AbstractObject::setName(const QString &name)
 {
-    m_name = name;
-    emit s_name(m_name);
+    setMetadata("name", name);
+    emit s_name(name);
 }
 
 bool AbstractObject::operator <(const AbstractObject& ao) const
