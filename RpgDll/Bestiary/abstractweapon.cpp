@@ -51,7 +51,7 @@ bool AbstractWeapon::operator == (const AbstractObject& ao) const
         const AbstractWeapon& aw = dynamic_cast<const AbstractWeapon&>(ao);
         ret = AbstractObject::operator ==(ao);
         
-        return ret && (aw.damage() == damage());
+        return ret;
     }
     catch(std::bad_cast bc)
     {
