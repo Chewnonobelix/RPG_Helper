@@ -1,6 +1,6 @@
 #include "abstractcreature.h"
 
-QSet<QString> AbstractCreature::uncharacteristic = QSet<QString>({"name", "race", "description"});
+QSet<QString> AbstractCreature::uncharacteristic = QSet<QString>({"name", "race", "description", "item", "rule", "id"});
 
 AbstractCreature::AbstractCreature(): QObject(nullptr)
 {

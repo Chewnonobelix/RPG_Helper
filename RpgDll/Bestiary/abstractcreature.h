@@ -18,6 +18,8 @@ class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
     Q_PROPERTY(QString race READ race WRITE setRace NOTIFY s_race)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY s_description)
     Q_PROPERTY(QStringList characteristicsList READ characteristicsList CONSTANT)
+    Q_PROPERTY(QStringList itemCategory READ itemTypeList CONSTANT)
+    Q_PROPERTY(QStringList ruleCategory READ ruleTypeList CONSTANT)
     
 protected:
     static QSet<QString> uncharacteristic;
@@ -45,11 +47,11 @@ public:
     void setCharacteristics(QString, double);
     
     QStringList itemTypeList() const;
-    QSet<ObjectPointer> itemSet(QString) const;
+    Q_INVOKABLE QSet<ObjectPointer> itemSet(QString) const;
     void setItem(QString, ObjectPointer);
 
     QStringList ruleTypeList() const;
-    QSet<BonusPointer> ruleSet(QString) const;
+    Q_INVOKABLE QSet<BonusPointer> ruleSet(QString) const;
     void setRule(QString, BonusPointer);
     
 signals:
