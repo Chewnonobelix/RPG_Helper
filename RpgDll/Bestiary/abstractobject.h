@@ -4,6 +4,7 @@
 #include <QObject>
 #include <typeinfo>
 #include <QDebug>
+#include <QUuid>
 #include "metadata.h"
 
 #include "Bestiary_global.h"
@@ -12,7 +13,8 @@ class BESTIARY_EXPORT AbstractObject: public QObject, protected MetaData
 {
     Q_OBJECT
     
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
+	Q_PROPERTY(QUuid id READ id CONSTANT)
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
     
 private:
     
@@ -26,6 +28,8 @@ public:
     virtual bool operator ==(const AbstractObject&) const;
     virtual AbstractObject& operator =(const AbstractObject&);
     
+	QUuid id() const;
+	void setId(QUuid);
     QString name() const;
     void setName(const QString &name);
 

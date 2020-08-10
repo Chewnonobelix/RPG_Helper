@@ -17,6 +17,16 @@ AbstractObject::~AbstractObject()
     
 }
 
+QUuid AbstractObject::id() const
+{
+        return metaData<QUuid>("id");
+}
+
+void AbstractObject::setId(QUuid i)
+{
+	setMetadata("id", i);
+}
+
 QString AbstractObject::name() const
 {
     return metaData<QString>("name");
