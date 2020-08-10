@@ -2,6 +2,7 @@
 #define ABSRACTBONUS_H
 
 #include <QObject>
+#include <QUuid>
 #include "Bestiary_global.h"
 #include "metadata.h"
 
@@ -9,7 +10,8 @@ class BESTIARY_EXPORT AbstractBonus : public QObject, protected MetaData
 {
     Q_OBJECT
     
-    Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
+	Q_PROPERTY(QUuid id READ id CONSTANT)
+	Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY s_description)
     
 public:
@@ -21,6 +23,8 @@ public:
     virtual bool operator ==(const AbstractBonus&) const;
     virtual bool operator <(const AbstractBonus&) const;
     
+	QUuid id() const;
+	void setId(QUuid);
     QString name() const;
     void setName(QString);
     

@@ -30,10 +30,14 @@ bool AbstractBonus::operator <(const AbstractBonus& ab) const
 {
     bool ret = false;
     
-    for(auto it: metadataList())
-        ret |= metaData<QVariant>(it) < ab.metaData<QVariant>(it);
-    
-    return ret;
+QUuid AbstractBonus::id() const
+{
+	return metaData<QUuid>("id");
+}
+
+void AbstractBonus::setId(QUuid i)
+{
+	setMetadata("id", i);
 }
 
 QString AbstractBonus::name() const
