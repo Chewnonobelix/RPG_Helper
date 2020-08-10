@@ -1,7 +1,9 @@
 #include "abstractweapon.h"
 
 AbstractWeapon::AbstractWeapon()
-{}
+{
+	setDamage(QString());
+}
 
 AbstractWeapon::AbstractWeapon(const AbstractWeapon & aw): AbstractObject(aw),
     m_damage(aw.damage())
