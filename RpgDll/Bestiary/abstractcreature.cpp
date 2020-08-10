@@ -21,19 +21,14 @@ AbstractCreature& AbstractCreature::operator = (const AbstractCreature& ac)
 
 bool AbstractCreature::operator == (const AbstractCreature& ac) const
 {
-    bool ret = true;
-    for(auto it: metadataList())
-        ret &= metaData<QVariant>(it) == ac.metaData<QVariant>(it);
-    
-    return ret;
+    return id() == ac.id();
 }
 
 bool AbstractCreature::operator < (const AbstractCreature& ac) const
-{
-    bool ret = false;
-    for(auto it: metadataList())
-        ret |= metaData<QVariant>(it) < ac.metaData<QVariant>(it);
-    
+{    
+    return name() < ac.name() || race() < ac.race();
+}
+
 QUuid AbstractCreature::id() const
 {
 	return metaData<QUuid>("id");
