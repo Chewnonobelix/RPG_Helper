@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QSet>
+#include <QUuid>
 #include "metadata.h"
 #include "Bestiary_global.h"
 #include "abstractweapon.h"
@@ -12,6 +13,7 @@ class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
 {
     Q_OBJECT
     
+	Q_PROPERTY(QUuid id READ id CONSTANT)
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY s_name)
     Q_PROPERTY(QString race READ race WRITE setRace NOTIFY s_race)
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY s_description)
@@ -29,6 +31,8 @@ public:
     virtual bool operator == (const AbstractCreature&) const;
     virtual bool operator < (const AbstractCreature&) const;
     
+	QUuid id() const;
+	void setId(QUuid);
     QString name() const;
     void setName(QString);
     QString race() const;

@@ -34,7 +34,14 @@ bool AbstractCreature::operator < (const AbstractCreature& ac) const
     for(auto it: metadataList())
         ret |= metaData<QVariant>(it) < ac.metaData<QVariant>(it);
     
-    return ret;
+QUuid AbstractCreature::id() const
+{
+	return metaData<QUuid>("id");
+}
+
+void AbstractCreature::setId(QUuid i)
+{
+	setMetadata("id", i);
 }
 
 QString AbstractCreature::name() const
