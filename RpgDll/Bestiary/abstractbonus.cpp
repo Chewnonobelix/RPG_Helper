@@ -2,7 +2,8 @@
 
 AbstractBonus::AbstractBonus() : QObject(nullptr)
 {
-    
+	setId(QUuid());
+	setName(QString());
 }
 
 AbstractBonus::AbstractBonus(const AbstractBonus& ab): QObject(nullptr), MetaData(ab)
