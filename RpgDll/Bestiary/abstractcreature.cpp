@@ -138,3 +138,22 @@ void AbstractCreature::setRule(QString name, RulePointer obj)
     setMetadata("rule", map);
     emit s_rule(name, obj);
 }
+
+class GenericCreature: public AbstractCreature
+{
+public:
+    GenericCreature() = default;
+    GenericCreature(const GenericCreature&) = default;
+    ~GenericCreature() = default;
+};
+
+QSharedPointer<AbstractCreature> AbstractCreature::createGeneric()
+{
+    return DesignPattern::factory<GenericCreature>();
+}
+
+QSharedPointer<AbstractCreature> AbstractCreature::createGeneric(const AbstractCreature& ac)
+{
+    return DesignPattern::factory<GenericCreature>(dynamic_cast<const GenericCreature&>(ac));
+}
+

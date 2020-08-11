@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QSet>
 #include <QUuid>
+#include "designpattern.h"
 #include "metadata.h"
 #include "Bestiary_global.h"
 #include "abstractweapon.h"
@@ -53,6 +54,9 @@ public:
     QStringList ruleTypeList() const;
     Q_INVOKABLE QSet<RulePointer> ruleSet(QString) const;
     void setRule(QString, RulePointer);
+
+    static QSharedPointer<AbstractCreature> createGeneric();
+    static QSharedPointer<AbstractCreature> createGeneric(const AbstractCreature&);
     
 signals:
      void s_name(QString);
