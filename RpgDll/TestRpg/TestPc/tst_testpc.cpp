@@ -3,21 +3,21 @@
 #include "abstractpc.h"
 // add necessary includes here
 
-class TestPc : public AbstractPc
+class TestPc : public QObject
 {
     Q_OBJECT
 private:
     const int level1 = 2;
     const double current = 1.2;
     const double target = 2.4;
-    const QStringList class1 = {"c1"};
+    const QString class1 = "c1";
 
 public:
     TestPc();
     ~TestPc();
 
-    void addXp(double);
-    QSharedPointer<AbstractPc> copy;
+    QSharedPointer<AbstractPc> copy, model;
+
 private slots:
     void test_level();
     void test_currentXp();
@@ -30,7 +30,7 @@ private slots:
 
 TestPc::TestPc()
 {
-
+    model = AbstractPc::createGeneric();
 }
 
 TestPc::~TestPc()
@@ -38,61 +38,58 @@ TestPc::~TestPc()
 
 }
 
-void TestPc::addXp(double)
-{}
-
 void TestPc::test_level()
 {
-    QSignalSpy spy(this, SIGNAL(s_level(int)));
-    QVERIFY(this->level() != level1);
-    setLevel(level1);
-    QCOMPARE(this->level(), level1);
+    QSignalSpy spy(model.data(), SIGNAL(s_level(int)));
+    QVERIFY(model->level() != level1);
+    model->setLevel(level1);
+    QCOMPARE(model->level(), level1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestPc::test_currentXp()
 {
-    QSignalSpy spy(this, SIGNAL(s_currentXp(double)));
-    QVERIFY(this->currentXp() != current);
-    setCurrentXp(current);
-    QCOMPARE(this->currentXp(), current);
+    QSignalSpy spy(model.data(), SIGNAL(s_currentXp(double)));
+    QVERIFY(model->currentXp() != current);
+    model->setCurrentXp(current);
+    QCOMPARE(model->currentXp(), current);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestPc::test_targetXp()
 {
-    QSignalSpy spy(this, SIGNAL(s_targetXp(double)));
-    QVERIFY(this->targetXp() != target);
-    setTargetXp(target);
-    QCOMPARE(this->targetXp(), target);
+    QSignalSpy spy(model.data(), SIGNAL(s_targetXp(double)));
+    QVERIFY(model->targetXp() != target);
+    model->setTargetXp(target);
+    QCOMPARE(model->targetXp(), target);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestPc::test_classes()
 {
-    QSignalSpy spy(this, SIGNAL(s_classes(QStringList)));
-    QVERIFY(this->classes() != class1);
-    setClasses(class1);
-    QCOMPARE(this->classes(), class1);
+    QSignalSpy spy(model.data(), SIGNAL(s_classes(QString)));
+    QVERIFY(model->classes() != class1);
+    model->setClasses(class1);
+    QCOMPARE(model->classes(), class1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestPc::test_copy()
 {
     QVERIFY(copy.isNull());
-    copy = QSharedPointer<TestPc>::create(*this);
+    copy = AbstractPc::createGeneric(*model);
     QCOMPARE(copy->level(), level1);
 }
 
 void TestPc::test_equality()
 {
-    QCOMPARE(*this, *copy);
+    QCOMPARE(*model, *copy);
 }
 
 void TestPc::test_inferior()
 {
     copy->setLevel(level1+1);
-    QCOMPARE(*this < *copy, true);
+    QCOMPARE(*model < *copy, true);
 }
 
 QTEST_APPLESS_MAIN(TestPc)
