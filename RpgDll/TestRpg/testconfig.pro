@@ -6,6 +6,8 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
+CONFIG(release, debug|release):FINALDIR = release
+CONFIG(debug, debug|release):FINALDIR = debug
 
 #Pour les dll
 
@@ -15,11 +17,11 @@ INCLUDEPATH += $${PWD}/../Bestiary/
 
 #DEPENDPATH += $$OUT_PWD/../../DiceRoller/Dice $${OUT_PWD}/../../GraphLibrary/GraphLib $${OUT_PWD}/../../ExpressionLibrary/LibExpression $${OUT_PWD}/../../DesignLibrary/DesignPattern
 
-LIBS += -L$$OUT_PWD/../../../DiceRoller/Dice/debug -lDice
-LIBS += -L$$OUT_PWD/../../../GraphLibrary/GraphLib/debug -lGraph
-LIBS += -L$$OUT_PWD/../../../ExpressionLibrary/LibExpression/debug -lLibExpression
-LIBS += -L$$OUT_PWD/../../../DesignLibrary/DesignPattern/debug -lDesignPattern
-LIBS += -L$$OUT_PWD/../../Bestiary/debug -lBestiary
+LIBS += -L$$OUT_PWD/../../../DiceRoller/Dice/$$FINALDIR -lDice
+LIBS += -L$$OUT_PWD/../../../GraphLibrary/GraphLib/$$FINALDIR -lGraph
+LIBS += -L$$OUT_PWD/../../../ExpressionLibrary/LibExpression/$$FINALDIR -lLibExpression
+LIBS += -L$$OUT_PWD/../../../DesignLibrary/DesignPattern/$$FINALDIR -lDesignPattern
+LIBS += -L$$OUT_PWD/../../Bestiary/$$FINALDIR -lBestiary
 
 CONFIG += c++17
 
