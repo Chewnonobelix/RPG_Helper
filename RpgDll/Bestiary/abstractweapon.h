@@ -2,6 +2,7 @@
 #define ABSTRACTWEAPON_H
 
 #include "abstractobject.h"
+#include "designpattern.h"
 
 class BESTIARY_EXPORT AbstractWeapon : public AbstractObject
 {

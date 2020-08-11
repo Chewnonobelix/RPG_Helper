@@ -7,6 +7,7 @@
 #include <QUuid>
 #include <QSharedPointer>
 #include "metadata.h"
+#include "designpattern.h"
 
 #include "Bestiary_global.h"
 

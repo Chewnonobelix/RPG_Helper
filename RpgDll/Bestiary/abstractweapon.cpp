@@ -82,11 +82,11 @@ public:
 
 WeaponPointer AbstractWeapon::createGeneric()
 {
-    return QSharedPointer<GenericWeapon>::create();
+    return DesignPattern::factory<GenericWeapon>();
 }
 
 WeaponPointer AbstractWeapon::createGeneric(const AbstractWeapon& ao)
 {
-    return QSharedPointer<GenericWeapon>::create(dynamic_cast<const GenericWeapon&>(ao));
+    return DesignPattern::factory<GenericWeapon>(dynamic_cast<const GenericWeapon&>(ao));
 }
 

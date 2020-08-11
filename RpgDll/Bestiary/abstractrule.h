@@ -6,6 +6,7 @@
 #include <QSharedPointer>
 #include "Bestiary_global.h"
 #include "metadata.h"
+#include "designpattern.h"
 
 class BESTIARY_EXPORT AbstractRule : public QObject, protected MetaData
 {

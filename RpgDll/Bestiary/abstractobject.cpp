@@ -64,11 +64,11 @@ public:
 
 ObjectPointer AbstractObject::createGeneric()
 {
-    return QSharedPointer<GenericObject>::create();
+    return DesignPattern::factory<GenericObject>();
 }
 
 ObjectPointer AbstractObject::createGeneric(const AbstractObject& ao)
 {
-    return QSharedPointer<GenericObject>::create(dynamic_cast<const GenericObject&>(ao));
+    return DesignPattern::factory<GenericObject>(dynamic_cast<const GenericObject&>(ao));
 }
 

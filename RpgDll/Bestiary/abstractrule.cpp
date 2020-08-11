@@ -69,10 +69,10 @@ public:
 
 RulePointer AbstractRule::createGeneric()
 {
-    return QSharedPointer<GenericRule>::create();
+    return DesignPattern::factory<GenericRule>();
 }
 
 RulePointer AbstractRule::createGeneric(const AbstractRule& ar)
 {
-    return QSharedPointer<GenericRule>::create(dynamic_cast<const GenericRule&>(ar));
+    return DesignPattern::factory<GenericRule>(dynamic_cast<const GenericRule&>(ar));
 }
