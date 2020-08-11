@@ -3,13 +3,13 @@
 
 // add necessary includes here
 
-class TestItem : public AbstractObject
+class TestItem : public QObject
 {
     Q_OBJECT
 private:
     const QString name1 = "name1";
 	const QUuid id1 = QUuid::createUuid();
-    QSharedPointer<AbstractObject> copy;
+    QSharedPointer<AbstractObject> copy, model;
 
 public:
     TestItem();
@@ -25,7 +25,7 @@ private slots:
 
 TestItem::TestItem()
 {
-
+    model = AbstractObject::createGeneric();
 }
 
 TestItem::~TestItem()
@@ -35,36 +35,36 @@ TestItem::~TestItem()
 
 void TestItem::test_id()
 {
-	QVERIFY(id().isNull());
-	setId(id1);
-	QCOMPARE(id(), id1);
+    QVERIFY(model->id().isNull());
+    model->setId(id1);
+    QCOMPARE(model->id(), id1);
 }
 
 void TestItem::test_name()
 {
-    QSignalSpy spy(this, SIGNAL(s_name(QString)));
-    QVERIFY(this->name() != name1);
-    setName(name1);
-    QCOMPARE(this->name(), name1);
+    QSignalSpy spy(model.data(), SIGNAL(s_name(QString)));
+    QVERIFY(model->name() != name1);
+    model->setName(name1);
+    QCOMPARE(model->name(), name1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestItem::test_copy_consttructor()
 {
     QVERIFY(copy.isNull());
-    copy = QSharedPointer<TestItem>::create(*this);
+    copy = AbstractObject::createGeneric(*model);
     QCOMPARE(copy->name(), name1);
 }
 
 void TestItem::test_equality()
 {
-    QCOMPARE(*this, *copy);
+    QCOMPARE(*model, *copy);
 }
 
 void TestItem::test_inferior()
 {
     copy->setName(name1+"1");
-    QCOMPARE(*this < *copy, true);
+    QCOMPARE(*model < *copy, true);
 }
 
 
