@@ -20,7 +20,7 @@ private:
     const ObjectPointer itemValue1 = ItemImpl::create();
 
     const QString ruleName1 = "r1";
-    const BonusPointer ruleValue1 = RuleImpl::create();
+    const RulePointer ruleValue1 = RuleImpl::create();
 
     QSharedPointer<AbstractCreature> copy;
 
@@ -109,7 +109,7 @@ void TestCreature::test_item()
 
 void TestCreature::test_rule()
 {
-    QSignalSpy spy(this, SIGNAL(s_rule(QString, BonusPointer)));
+    QSignalSpy spy(this, SIGNAL(s_rule(QString, RulePointer)));
     QVERIFY(ruleTypeList().isEmpty());
     setRule(ruleName1, ruleValue1);
     QCOMPARE(spy.count(), 1);

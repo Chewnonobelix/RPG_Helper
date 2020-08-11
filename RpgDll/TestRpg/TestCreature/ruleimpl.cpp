@@ -1,6 +1,6 @@
 #include "ruleimpl.h"
 
-BonusPointer RuleImpl::create()
+RulePointer RuleImpl::create()
 {
     return QSharedPointer<RuleImpl>::create();
 }

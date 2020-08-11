@@ -7,7 +7,7 @@
 #include "metadata.h"
 #include "Bestiary_global.h"
 #include "abstractweapon.h"
-#include "abstractbonus.h"
+#include "abstractrule.h"
 
 class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
 {
@@ -51,8 +51,8 @@ public:
     void setItem(QString, ObjectPointer);
 
     QStringList ruleTypeList() const;
-    Q_INVOKABLE QSet<BonusPointer> ruleSet(QString) const;
-    void setRule(QString, BonusPointer);
+    Q_INVOKABLE QSet<RulePointer> ruleSet(QString) const;
+    void setRule(QString, RulePointer);
     
 signals:
      void s_name(QString);
@@ -60,7 +60,7 @@ signals:
      void s_description(QString);
      void s_characteristics(QString, double);
      void s_object(QString, ObjectPointer);
-     void s_rule(QString, BonusPointer);
+     void s_rule(QString, RulePointer);
 };
 
 typedef QSharedPointer<AbstractCreature> CreaturePointer;

@@ -1,6 +1,6 @@
 #include <QtTest>
 #include <QSignalSpy>
-#include "abstractbonus.h"
+#include "abstractrule.h"
 // add necessary includes here
 
 class TestBonus : public AbstractBonus
@@ -10,7 +10,7 @@ private:
 	const QUuid id1 = QUuid::createUuid();
     const QString name1 = "name1";
     const QString description1 = "description1";
-    QSharedPointer<AbstractBonus> copy;
+    QSharedPointer<AbstractRule> model, copy;
 
 public:
     TestBonus();

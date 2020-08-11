@@ -2,15 +2,15 @@
 #define RULEIMPL_H
 
 #include <QSharedPointer>
-#include "abstractbonus.h"
+#include "abstractrule.h"
 
-class RuleImpl: public AbstractBonus
+class RuleImpl: public AbstractRule
 {
 public:
     RuleImpl() = default;
     ~RuleImpl() = default;
 
-    static BonusPointer create();
+    static RulePointer create();
 };
 
 #endif // RULEIMPL_H

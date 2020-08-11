@@ -123,16 +123,16 @@ QStringList AbstractCreature::ruleTypeList() const
     return map.keys();
 }
 
-QSet<BonusPointer> AbstractCreature::ruleSet(QString name) const
+QSet<RulePointer> AbstractCreature::ruleSet(QString name) const
 {
     auto map = metaData<QVariant>("rule").toMap();
-    return map[name].value<QSet<BonusPointer>>();    
+    return map[name].value<QSet<RulePointer>>();    
 }
 
-void AbstractCreature::setRule(QString name, BonusPointer obj)
+void AbstractCreature::setRule(QString name, RulePointer obj)
 {
     auto map = metaData<QVariant>("rule").toMap();
-    auto set = map[name].value<QSet<BonusPointer>>();
+    auto set = map[name].value<QSet<RulePointer>>();
     set<<obj;
     map[name] = QVariant::fromValue(set);
     setMetadata("rule", map);

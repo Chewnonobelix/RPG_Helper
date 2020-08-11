@@ -3,10 +3,11 @@
 
 #include <QObject>
 #include <QUuid>
+#include <QSharedPointer>
 #include "Bestiary_global.h"
 #include "metadata.h"
 
-class BESTIARY_EXPORT AbstractBonus : public QObject, protected MetaData
+class BESTIARY_EXPORT AbstractRule : public QObject, protected MetaData
 {
     Q_OBJECT
     
@@ -15,13 +16,14 @@ class BESTIARY_EXPORT AbstractBonus : public QObject, protected MetaData
     Q_PROPERTY(QString description READ description WRITE setDescription NOTIFY s_description)
     
 public:
-    AbstractBonus();
-    AbstractBonus(const AbstractBonus&);
-    ~AbstractBonus() = 0;
+    AbstractRule();
+    AbstractRule(const AbstractRule&);
+    ~AbstractRule() = 0;
     
-    virtual AbstractBonus& operator =(const AbstractBonus&);
-    virtual bool operator ==(const AbstractBonus&) const;
-    virtual bool operator <(const AbstractBonus&) const;
+
+    virtual AbstractRule& operator =(const AbstractRule&);
+    virtual bool operator ==(const AbstractRule&) const;
+    virtual bool operator <(const AbstractRule&) const;
     
 	QUuid id() const;
 	void setId(QUuid);
@@ -36,5 +38,5 @@ signals:
     void s_description(QString);
 };
 
-typedef QSharedPointer<AbstractBonus> BonusPointer;
+typedef QSharedPointer<AbstractRule> RulePointer;
 #endif // ABSRACTBONUS_H
