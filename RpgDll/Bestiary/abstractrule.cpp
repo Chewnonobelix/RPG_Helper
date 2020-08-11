@@ -59,3 +59,20 @@ void AbstractRule::setDescription(QString d)
     emit s_description(description());
 }
 
+class GenericRule: public AbstractRule
+{
+public:
+    GenericRule() = default;
+    GenericRule(const GenericRule&) = default;
+    ~GenericRule() = default;
+};
+
+RulePointer AbstractRule::createGeneric()
+{
+    return QSharedPointer<GenericRule>::create();
+}
+
+RulePointer AbstractRule::createGeneric(const AbstractRule& ar)
+{
+    return QSharedPointer<GenericRule>::create(dynamic_cast<const GenericRule&>(ar));
+}

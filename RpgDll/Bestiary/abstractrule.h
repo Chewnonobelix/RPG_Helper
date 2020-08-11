@@ -20,6 +20,8 @@ public:
     AbstractRule(const AbstractRule&);
     ~AbstractRule() = 0;
     
+    static QSharedPointer<AbstractRule> createGeneric();
+    static QSharedPointer<AbstractRule> createGeneric(const AbstractRule&);
 
     virtual AbstractRule& operator =(const AbstractRule&);
     virtual bool operator ==(const AbstractRule&) const;
