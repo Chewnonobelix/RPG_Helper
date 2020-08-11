@@ -2,7 +2,7 @@
 
 AbstractPc::AbstractPc() : QObject(), MetaData()
 {
-        setClasses(QStringList());
+        setClasses(QString());
 	setLevel(0);
 	setCurrentXp(0);
 	setTargetXp(0);
@@ -44,12 +44,12 @@ void AbstractPc::setTargetXp(double t)
     emit s_targetXp(t);
 }
 
-QStringList AbstractPc::classes() const
+QString AbstractPc::classes() const
 {
-    return metaData<QStringList>("classes");
+    return metaData<QString>("classes");
 }
 
-void AbstractPc::setClasses(QStringList c)
+void AbstractPc::setClasses(QString c)
 {
     setMetadata("classes", c);
     emit s_classes(c);
@@ -74,4 +74,28 @@ AbstractPc& AbstractPc::operator = (const AbstractPc& pc)
     (MetaData&)*this = pc;
     return *this;
 }
+
+class GenericPc: public AbstractPc
+{
+public:
+    GenericPc() = default;
+    GenericPc(const GenericPc&) = default;
+    ~GenericPc() = default;
+
+    void addXp(double);
+};
+
+void GenericPc::addXp(double)
+{}
+
+QSharedPointer<AbstractPc> AbstractPc::createGeneric()
+{
+    return DesignPattern::factory<GenericPc>();
+}
+
+QSharedPointer<AbstractPc> AbstractPc::createGeneric(const AbstractPc& pc)
+{
+    return DesignPattern::factory<GenericPc>(dynamic_cast<const GenericPc&>(pc));
+}
+
 
