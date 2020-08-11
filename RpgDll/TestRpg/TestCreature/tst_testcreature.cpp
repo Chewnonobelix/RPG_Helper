@@ -6,7 +6,7 @@
 
 // add necessary includes here
 
-class TestCreature : public AbstractCreature
+class TestCreature : public QObject
 {
     Q_OBJECT
 private:
@@ -22,7 +22,7 @@ private:
     const QString ruleName1 = "r1";
     const RulePointer ruleValue1 = RuleImpl::create();
 
-    QSharedPointer<AbstractCreature> copy;
+    QSharedPointer<AbstractCreature> copy, model;
 
 public:
     TestCreature();
@@ -44,7 +44,7 @@ private slots:
 
 TestCreature::TestCreature()
 {
-
+    model = AbstractCreature::createGeneric();
 }
 
 TestCreature::~TestCreature()
@@ -54,85 +54,85 @@ TestCreature::~TestCreature()
 
 void TestCreature::test_id()
 {
-	QVERIFY(id().isNull());
-	setId(id1);
-	QCOMPARE(id(), id1);
+    QVERIFY(model->id().isNull());
+    model->setId(id1);
+    QCOMPARE(model->id(), id1);
 }
 
 
 void TestCreature::test_name()
 {
-    QSignalSpy spy(this, SIGNAL(s_name(QString)));
-    QVERIFY(this->name() != name1);
-    setName(name1);
-    QCOMPARE(this->name(), name1);
+    QSignalSpy spy(model.data(), SIGNAL(s_name(QString)));
+    QVERIFY(model->name() != name1);
+    model->setName(name1);
+    QCOMPARE(model->name(), name1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestCreature::test_description()
 {
-    QSignalSpy spy(this, SIGNAL(s_description(QString)));
-    QVERIFY(this->description() != name1);
-    setDescription(name1);
-    QCOMPARE(this->description(), name1);
+    QSignalSpy spy(model.data(), SIGNAL(s_description(QString)));
+    QVERIFY(model->description() != name1);
+    model->setDescription(name1);
+    QCOMPARE(model->description(), name1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestCreature::test_race()
 {
-    QSignalSpy spy(this, SIGNAL(s_race(QString)));
-    QVERIFY(this->race() != name1);
-    setRace(name1);
-    QCOMPARE(this->race(), name1);
+    QSignalSpy spy(model.data(), SIGNAL(s_race(QString)));
+    QVERIFY(model->race() != name1);
+    model->setRace(name1);
+    QCOMPARE(model->race(), name1);
     QCOMPARE(spy.count(), 1);
 }
 
 void TestCreature::test_caracteristic()
 {
-    QSignalSpy spy(this, SIGNAL(s_characteristics(QString, double)));
-    QVERIFY(characteristicsList().isEmpty());
-    setCharacteristics(caracteriticName1, caracteriticValue1);
+    QSignalSpy spy(model.data(), SIGNAL(s_characteristics(QString, double)));
+    QVERIFY(model->characteristicsList().isEmpty());
+    model->setCharacteristics(caracteriticName1, caracteriticValue1);
     QCOMPARE(spy.count(), 1);
-    QCOMPARE(characteristicsList(), {caracteriticName1});
-    QCOMPARE(characteristics(caracteriticName1), {caracteriticValue1});
+    QCOMPARE(model->characteristicsList(), {caracteriticName1});
+    QCOMPARE(model->characteristics(caracteriticName1), {caracteriticValue1});
 }
 
 void TestCreature::test_item()
 {
-    QSignalSpy spy(this, SIGNAL(s_object(QString, ObjectPointer)));
-    QVERIFY(itemTypeList().isEmpty());
-    setItem(itemName1, itemValue1);
+    QSignalSpy spy(model.data(), SIGNAL(s_object(QString, ObjectPointer)));
+    QVERIFY(model->itemTypeList().isEmpty());
+    model->setItem(itemName1, itemValue1);
     QCOMPARE(spy.count(), 1);
-    QCOMPARE(itemTypeList(), {itemName1});
-    QCOMPARE(itemSet(itemName1), {itemValue1});
+    QCOMPARE(model->itemTypeList(), {itemName1});
+    QCOMPARE(model->itemSet(itemName1), {itemValue1});
 }
 
 void TestCreature::test_rule()
 {
-    QSignalSpy spy(this, SIGNAL(s_rule(QString, RulePointer)));
-    QVERIFY(ruleTypeList().isEmpty());
-    setRule(ruleName1, ruleValue1);
+    QSignalSpy spy(model.data(), SIGNAL(s_rule(QString, RulePointer)));
+    QVERIFY(model->ruleTypeList().isEmpty());
+    model->setRule(ruleName1, ruleValue1);
     QCOMPARE(spy.count(), 1);
-    QCOMPARE(ruleTypeList(), {ruleName1});
-    QCOMPARE(ruleSet(ruleName1), {ruleValue1});
+    QCOMPARE(model->ruleTypeList(), {ruleName1});
+    QCOMPARE(model->ruleSet(ruleName1), {ruleValue1});
 }
 
 void TestCreature::test_copy_constructor()
 {
     QVERIFY(copy.isNull());
-    copy = QSharedPointer<TestCreature>::create(*this);
+    copy = AbstractCreature::createGeneric(*model);
     QCOMPARE(copy->name(), name1);
 }
 
 void TestCreature::test_equality()
 {
-    QCOMPARE(*this, *copy);
+    QCOMPARE(*model, *copy);
 }
 
 void TestCreature::test_inferior()
 {
     copy->setName(name1+"1");
-    QCOMPARE(*this < *copy, true);
+    QCOMPARE(*model < *copy, true);
 }
 
 
