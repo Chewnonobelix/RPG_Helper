@@ -53,3 +53,22 @@ AbstractObject& AbstractObject::operator =(const AbstractObject& ao)
     MetaData::operator =(ao);
     return *this;
 }
+
+class GenericObject: public AbstractObject
+{
+public:
+    GenericObject() = default;
+    GenericObject(const GenericObject&) = default;
+    ~GenericObject() = default;
+};
+
+ObjectPointer AbstractObject::createGeneric()
+{
+    return QSharedPointer<GenericObject>::create();
+}
+
+ObjectPointer AbstractObject::createGeneric(const AbstractObject& ao)
+{
+    return QSharedPointer<GenericObject>::create(dynamic_cast<const GenericObject&>(ao));
+}
+
