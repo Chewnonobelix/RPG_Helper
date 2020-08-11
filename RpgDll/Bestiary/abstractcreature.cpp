@@ -139,6 +139,28 @@ void AbstractCreature::setRule(QString name, RulePointer obj)
     emit s_rule(name, obj);
 }
 
+QStringList AbstractCreature::classesList() const
+{
+    auto map = metaData<QVariant>("classes").toMap();
+
+    return map.keys();
+}
+
+PcPointer AbstractCreature::classe(QString name) const
+{
+    auto map = metaData<QVariant>("classes").toMap();
+    return map[name].value<PcPointer>();
+}
+
+void AbstractCreature::setClasse(QString name, PcPointer pc)
+{
+    auto map = metaData<QVariant>("classes").toMap();
+
+    map[name] = QVariant::fromValue(pc);
+    setMetadata("classes", map);
+    emit s_classe(name, pc);
+}
+
 class GenericCreature: public AbstractCreature
 {
 public:
