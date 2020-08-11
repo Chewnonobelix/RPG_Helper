@@ -71,3 +71,22 @@ void AbstractWeapon::setDamage(QString d)
     m_damage = d;
     emit s_damage(m_damage);
 }
+
+class GenericWeapon: public AbstractWeapon
+{
+public:
+    GenericWeapon() = default;
+    GenericWeapon(const GenericWeapon&) = default;
+    ~GenericWeapon() = default;
+};
+
+WeaponPointer AbstractWeapon::createGeneric()
+{
+    return QSharedPointer<GenericWeapon>::create();
+}
+
+WeaponPointer AbstractWeapon::createGeneric(const AbstractWeapon& ao)
+{
+    return QSharedPointer<GenericWeapon>::create(dynamic_cast<const GenericWeapon&>(ao));
+}
+
