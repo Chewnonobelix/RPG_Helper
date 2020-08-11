@@ -46,4 +46,6 @@ signals:
     void s_classes(QString);
 };
 
+typedef QSharedPointer<AbstractPc> PcPointer;
+
 #endif // ABSTRACTPC_H
