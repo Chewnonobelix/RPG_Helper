@@ -32,3 +32,6 @@ unix {
 INCLUDEPATH += $${PWD}/../
 LIBS += -L$$OUT_PWD/../Bestiary/$$FINALDIR -lBestiary
 
+DISTFILES += \
+    View/Main.qml
+
