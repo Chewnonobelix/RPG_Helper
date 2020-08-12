@@ -53,3 +53,22 @@ AbstractObject& AbstractObject::operator =(const AbstractObject& ao)
     MetaData::operator =(ao);
     return *this;
 }
+
+class GenericObject: public AbstractObject
+{
+public:
+    GenericObject() = default;
+    GenericObject(const GenericObject&) = default;
+    ~GenericObject() = default;
+};
+
+ObjectPointer AbstractObject::createGeneric()
+{
+    return DesignPattern::factory<GenericObject>();
+}
+
+ObjectPointer AbstractObject::createGeneric(const AbstractObject& ao)
+{
+    return DesignPattern::factory<GenericObject>(dynamic_cast<const GenericObject&>(ao));
+}
+

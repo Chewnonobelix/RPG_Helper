@@ -2,6 +2,7 @@
 #define ABSTRACTWEAPON_H
 
 #include "abstractobject.h"
+#include "designpattern.h"
 
 class BESTIARY_EXPORT AbstractWeapon : public AbstractObject
 {
@@ -16,6 +17,9 @@ public:
     AbstractWeapon();
     AbstractWeapon(const AbstractWeapon &);
     
+    static QSharedPointer<AbstractWeapon> createGeneric();
+    static QSharedPointer<AbstractWeapon> createGeneric(const AbstractWeapon&);
+
     AbstractWeapon& operator =(const AbstractObject&) override;
     bool operator < (const AbstractObject&) const override;
     bool operator == (const AbstractObject&) const override;

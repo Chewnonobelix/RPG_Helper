@@ -123,18 +123,59 @@ QStringList AbstractCreature::ruleTypeList() const
     return map.keys();
 }
 
-QSet<BonusPointer> AbstractCreature::ruleSet(QString name) const
+QSet<RulePointer> AbstractCreature::ruleSet(QString name) const
 {
     auto map = metaData<QVariant>("rule").toMap();
-    return map[name].value<QSet<BonusPointer>>();    
+    return map[name].value<QSet<RulePointer>>();    
 }
 
-void AbstractCreature::setRule(QString name, BonusPointer obj)
+void AbstractCreature::setRule(QString name, RulePointer obj)
 {
     auto map = metaData<QVariant>("rule").toMap();
-    auto set = map[name].value<QSet<BonusPointer>>();
+    auto set = map[name].value<QSet<RulePointer>>();
     set<<obj;
     map[name] = QVariant::fromValue(set);
     setMetadata("rule", map);
     emit s_rule(name, obj);
 }
+
+QStringList AbstractCreature::classesList() const
+{
+    auto map = metaData<QVariant>("classes").toMap();
+
+    return map.keys();
+}
+
+PcPointer AbstractCreature::classe(QString name) const
+{
+    auto map = metaData<QVariant>("classes").toMap();
+    return map[name].value<PcPointer>();
+}
+
+void AbstractCreature::setClasse(QString name, PcPointer pc)
+{
+    auto map = metaData<QVariant>("classes").toMap();
+
+    map[name] = QVariant::fromValue(pc);
+    setMetadata("classes", map);
+    emit s_classe(name, pc);
+}
+
+class GenericCreature: public AbstractCreature
+{
+public:
+    GenericCreature() = default;
+    GenericCreature(const GenericCreature&) = default;
+    ~GenericCreature() = default;
+};
+
+QSharedPointer<AbstractCreature> AbstractCreature::createGeneric()
+{
+    return DesignPattern::factory<GenericCreature>();
+}
+
+QSharedPointer<AbstractCreature> AbstractCreature::createGeneric(const AbstractCreature& ac)
+{
+    return DesignPattern::factory<GenericCreature>(dynamic_cast<const GenericCreature&>(ac));
+}
+

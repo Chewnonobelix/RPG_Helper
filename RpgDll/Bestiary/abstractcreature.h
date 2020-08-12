@@ -4,10 +4,12 @@
 #include <QObject>
 #include <QSet>
 #include <QUuid>
+#include "designpattern.h"
 #include "metadata.h"
 #include "Bestiary_global.h"
 #include "abstractweapon.h"
-#include "abstractbonus.h"
+#include "abstractrule.h"
+#include "abstractpc.h"
 
 class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
 {
@@ -20,7 +22,8 @@ class BESTIARY_EXPORT AbstractCreature: public QObject, protected MetaData
     Q_PROPERTY(QStringList characteristicsList READ characteristicsList CONSTANT)
     Q_PROPERTY(QStringList itemCategory READ itemTypeList CONSTANT)
     Q_PROPERTY(QStringList ruleCategory READ ruleTypeList CONSTANT)
-    
+    Q_PROPERTY(QStringList classesList READ classesList CONSTANT)
+
 protected:
     static QSet<QString> uncharacteristic;
     
@@ -51,8 +54,15 @@ public:
     void setItem(QString, ObjectPointer);
 
     QStringList ruleTypeList() const;
-    Q_INVOKABLE QSet<BonusPointer> ruleSet(QString) const;
-    void setRule(QString, BonusPointer);
+    Q_INVOKABLE QSet<RulePointer> ruleSet(QString) const;
+    void setRule(QString, RulePointer);
+
+    QStringList classesList() const;
+    Q_INVOKABLE PcPointer classe(QString) const;
+    void setClasse(QString, PcPointer);
+
+    static QSharedPointer<AbstractCreature> createGeneric();
+    static QSharedPointer<AbstractCreature> createGeneric(const AbstractCreature&);
     
 signals:
      void s_name(QString);
@@ -60,7 +70,8 @@ signals:
      void s_description(QString);
      void s_characteristics(QString, double);
      void s_object(QString, ObjectPointer);
-     void s_rule(QString, BonusPointer);
+     void s_rule(QString, RulePointer);
+     void s_classe(QString, PcPointer);
 };
 
 typedef QSharedPointer<AbstractCreature> CreaturePointer;

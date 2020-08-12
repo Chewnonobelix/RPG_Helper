@@ -16,3 +16,8 @@ build-LibExpression-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
 *.lck
 
 *.bak*
+*.vbak
+
+build-DesignLibrary-Desktop_x86_windows_msvc2015_pe_32bit-Debug/DesignPattern/
+
+build-DesignLibrary-Desktop_x86_windows_msvc2015_pe_32bit-Debug/

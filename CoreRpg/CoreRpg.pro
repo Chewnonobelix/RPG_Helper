@@ -27,6 +27,9 @@ QML_IMPORT_PATH =
 # Additional import path used to resolve QML modules just for Qt Quick Designer
 QML_DESIGNER_IMPORT_PATH =
 
+CONFIG(release, debug|release):FINALDIR = release
+CONFIG(debug, debug|release):FINALDIR = debug
+
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
@@ -34,15 +37,15 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 INCLUDEPATH += $$PWD/../RpgDll/GameMaster
 #DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
-LIBS += -L$$OUT_PWD/../RpgDll/GameMaster/debug -lGameMaster
+LIBS += -L$$OUT_PWD/../RpgDll/GameMaster/$$FINALDIR -lGameMaster
 
 INCLUDEPATH += $${PWD}/DesignLibrary/DesignPattern $${PWD}/DiceRoller/Dice $${PWD}/ExpressionLibrary/LibExpression/Core $${PWD}/ExpressionLibrary/LibExpression/Operation
 INCLUDEPATH += $${PWD}/GraphLibrary/GraphLib
 
 #DEPENDPATH += $$OUT_PWD/../DiceRoller/Dice $${OUT_PWD}/../GraphLibrary/GraphLib $${OUT_PWD}/../ExpressionLibrary/LibExpression $${OUT_PWD}/../DesignLibrary/DesignPattern
 
-LIBS += -L$$OUT_PWD/../DiceRoller/Dice/debug -lDice
-LIBS += -L$$OUT_PWD/../GraphLibrary/GraphLib/debug -lGraph
-LIBS += -L$$OUT_PWD/../ExpressionLibrary/LibExpression/debug -lLibExpression
-LIBS += -L$$OUT_PWD/../DesignLibrary/DesignPattern/debug -lDesignPattern
+LIBS += -L$$OUT_PWD/../DiceRoller/Dice/$$FINALDIR -lDice
+LIBS += -L$$OUT_PWD/../GraphLibrary/GraphLib/$$FINALDIR -lGraph
+LIBS += -L$$OUT_PWD/../ExpressionLibrary/LibExpression/$$FINALDIR -lLibExpression
+LIBS += -L$$OUT_PWD/../DesignLibrary/DesignPattern/$$FINALDIR -lDesignPattern
 

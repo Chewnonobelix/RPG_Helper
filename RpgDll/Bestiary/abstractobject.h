@@ -5,7 +5,9 @@
 #include <typeinfo>
 #include <QDebug>
 #include <QUuid>
+#include <QSharedPointer>
 #include "metadata.h"
+#include "designpattern.h"
 
 #include "Bestiary_global.h"
 
@@ -23,7 +25,9 @@ public:
     AbstractObject(const AbstractObject& ao);
     ~AbstractObject() = 0;
 
-   
+    static QSharedPointer<AbstractObject> createGeneric();
+    static QSharedPointer<AbstractObject> createGeneric(const AbstractObject&);
+
     virtual bool operator <(const AbstractObject&) const;
     virtual bool operator ==(const AbstractObject&) const;
     virtual AbstractObject& operator =(const AbstractObject&);
