@@ -3,8 +3,7 @@ TEMPLATE = lib
 DEFINES += MAINRPG_LIBRARY
 
 include(../config.pro)
-
-# The following define makes your compiler emit warnings if you use
+CONFIG += sql# The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
@@ -17,12 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Controller/abstractcontroller.cpp \
-    Controller/maincontroller.cpp
+    Controller/maincontroller.cpp \
+    Controller/sqldatabase.cpp
 
 HEADERS += \
     Controller/abstractcontroller.h \
     Controller/interfacedatasave.h \
     Controller/maincontroller.h \
+    Controller/sqldatabase.h \
     MainRpg_global.h
 
 # Default rules for deployment.
