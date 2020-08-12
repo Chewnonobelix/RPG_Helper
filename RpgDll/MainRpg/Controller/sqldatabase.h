@@ -25,7 +25,7 @@ public:
 
     bool init();
 
-    QMap<QUuid, CreaturePointer> selectCreature(QList<QUuid> = QList<QUuid>()) const;
+    QMap<QUuid, CreaturePointer> selectCreature(QList<QUuid> = QList<QUuid>());
     bool removeCreature(CreaturePointer);
     bool updateCreature(CreaturePointer);
     bool addCreature(CreaturePointer);
