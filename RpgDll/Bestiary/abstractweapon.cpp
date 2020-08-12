@@ -50,7 +50,7 @@ bool AbstractWeapon::operator == (const AbstractObject& ao) const
     {
         const AbstractWeapon& aw = dynamic_cast<const AbstractWeapon&>(ao);
         ret = AbstractObject::operator ==(ao);
-        
+        Q_UNUSED(aw)
         return ret;
     }
     catch(std::bad_cast bc)

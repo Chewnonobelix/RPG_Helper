@@ -74,7 +74,8 @@ void AbstractCreature::setDescription(QString d)
 
 QStringList AbstractCreature::characteristicsList() const
 {
-    auto ret = metadataList().toSet();
+    auto l = metadataList();
+    auto ret = QSet<QString>(l.begin(), l.end());
     ret -= uncharacteristic;
     return ret.values();
 }
