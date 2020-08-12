@@ -60,4 +60,20 @@
 	END;
 	</trigger>
 
+	<request name = "selectAllCreature">
+	SELECT * FROM creature
+	</request>
+	<request name = "selectOneCreature">
+	SELECT * FROM creature 
+	WHERE id=:id
+	</request>
+	<request name = "selectCreatureCarac">
+	SELECT * FROM creature_carac 
+	WHERE id=:id
+	</request>
+	<request name = "selectCreatureAssoc">
+	SELECT * FROM creature_association 
+	WHERE id=:id
+	</request>
+	
 </req>
