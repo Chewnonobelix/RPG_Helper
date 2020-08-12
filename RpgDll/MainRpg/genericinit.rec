@@ -1,7 +1,9 @@
 <req>
 	<init name="genericitem">
 	CREATE TABLE 'item' ('id' TEXT NOT NULL PRIMARY KEY, 
-			'name' TEXT NOT NULL DEFAULT '')
+			'name' TEXT NOT NULL DEFAULT '', 
+			CONSTRAINT item_unique UNIQUE(id)
+			)
 	</init>
 	
 	<init name="genericweapon">
@@ -12,19 +14,50 @@
 	<trigger name="delete_weapon">
 	CREATE TRIGGER delete_weapon BEFORE DELETE ON item 
 	BEGIN 
-	DELETE FROM weapon WHERE if=OLD.id
-	END
+	DELETE FROM weapon WHERE if=OLD.id;
+	END;
 	</trigger>
 	
 	<init name="genericrule">
 	CREATE TABLE 'rule' ('id' TEXT NOT NULL PRIMARY KEY, 
 			'name' TEXT NOT NULL DEFAULT '', 
-			'description' TEXT DEFAULT NULL)
+			'description' TEXT DEFAULT NULL, 
+			CONSTRAINT rule_unique UNIQUE(id)
+			)
 	</init>
 	
 	<init name="genericcreature">
 	CREATE TABLE 'creature' ('id' TEXT NOT NULL PRIMARY KEY, 
 			'name' TEXT NOT NULL DEFAULT '', 
-			'description' TEXT DEFAULT NULL)
+			'description' TEXT DEFAULT NULL, 
+			'race' TEXT DEFAULT NULL, 
+			CONSTRAINT creature_unique UNIQUE(id)
+			)
 	</init>
+	
+	<init name="creature_association">
+		CREATE TABLE creature_association (
+		'id' TEXT NOT NULL REFERENCES creature(id), 
+		'item' TEXT DEFAULT NULL REFERENCES item(id), 
+		'weapon' TEXT DEFAULT NULL REFERENCES weapon(id), 
+		'rule' TEXT DEFAULT NULL REFERENCES rule(id)
+		)
+	</init>
+	
+	<init name="creature_carac">
+		CREATE TABLE creature_carac (
+		'id' TEXT NOT NULL REFERENCES creature(id), 
+		'name' TEXT NOT NULL, 
+		'value' DOUBLE NOT NULL 
+		)
+	</init>
+	
+	<trigger name="delete_creature">
+	CREATE TRIGGER delete_creature BEFORE DELETE ON creature 
+	BEGIN 
+	DELETE FROM creature_association WHERE if=OLD.id;
+	DELETE FROM creature_carac WHERE if=OLD.id;
+	END;
+	</trigger>
+
 </req>
