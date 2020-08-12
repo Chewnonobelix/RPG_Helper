@@ -40,10 +40,22 @@ bool SqlDataBase::init()
             qDebug()<<res.executedQuery()<<res.lastError();
         }
     }
+
+    auto in = root.elementsByTagName("request");
+
+    for(int i = 0; i < in.size(); i++)
+    {
+        QDomElement el = in.at(i).toElement();
+        QString req = el.text();
+        m_queries[el.attribute("name")] = QSqlQuery(req, m_db);
+    }
+
+    qDebug()<<"Req"<<m_queries.keys();
+
     return true;
 }
 
-QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid>) const
+QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid>)
 {
     return QMap<QUuid, CreaturePointer>();
 }

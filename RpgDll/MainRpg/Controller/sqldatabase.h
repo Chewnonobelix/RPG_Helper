@@ -10,6 +10,7 @@
 #include <QFile>
 #include <QDomDocument>
 #include <QDomElement>
+#include <QMap>
 #include "interfacedatasave.h"
 #include "../MainRpg_global.h"
 
@@ -18,6 +19,7 @@ class MAINRPG_EXPORT SqlDataBase : public InterfaceDataSave
     Q_OBJECT
 private:
     QSqlDatabase m_db;
+    QMap<QString, QSqlQuery> m_queries;
 
 public:
     SqlDataBase();
