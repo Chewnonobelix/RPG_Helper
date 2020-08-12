@@ -76,4 +76,33 @@
 	WHERE id=:id
 	</request>
 	
+	<request name="updateCreature">
+	UPDATE creature
+	SET name=:name, description=:description, race=:race 
+	WHERE id=:id 
+	</request>
+	<request name="updateCreatureAssociation">
+	UPDATE creature_association
+	SET item=:item, weapon=:weapon, rule=:rule  
+	WHERE id=:id 
+	</request>
+	<request name="updateCreatureCarac">
+	UPDATE creature_carac
+	SET value=:value  
+	WHERE id=:id AND name=:name 
+	</request>
+	
+	<request name="insertCreature">
+	INSERT INTO creature (id, name, race, description) 
+	VALUES (:id, :name, :race, :description) 
+	</request>
+	<request name="insertCreatureAssociation">
+	INSERT INTO creature_association (id, item, weapon, rule) 
+	VALUES (:id, :item, :weapon, :rule) 
+	</request>
+	<request name="insertCreatureCarac">
+	INSERT INTO creature_carac (id, name, value) 
+	VALUES (:id, :name, :value) 
+	</request>
+	
 </req>
