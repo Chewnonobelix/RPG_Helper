@@ -3,7 +3,8 @@ TEMPLATE = lib
 DEFINES += MAINRPG_LIBRARY
 
 include(../config.pro)
-CONFIG += sql# The following define makes your compiler emit warnings if you use
+
+# The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
@@ -32,7 +33,7 @@ unix {
 }
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $${PWD}/../
+INCLUDEPATH += $${PWD}/../Bestiary
 LIBS += -L$$OUT_PWD/../Bestiary/$$FINALDIR -lBestiary
 
 DISTFILES += \

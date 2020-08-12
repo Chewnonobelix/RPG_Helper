@@ -15,6 +15,7 @@ private:
 public:
     explicit AbstractController(QObject *parent = nullptr);
     static InterfaceDataSave* db();
+    static void setDb(InterfaceDataSave* = nullptr);
 
 signals:
 

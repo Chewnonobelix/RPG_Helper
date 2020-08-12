@@ -19,7 +19,7 @@ TRANSLATIONS += \
 
 CONFIG += c++17
 
-QT += core widgets quick xml gui
+QT += quick sql core xml widgets charts qml gui xmlpatterns network
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -35,12 +35,13 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-INCLUDEPATH += $$PWD/../RpgDll/GameMaster
+INCLUDEPATH += $$PWD/../RpgDll/Bestiary $$PWD/../RpgDll/MainRpg
 #DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
 LIBS += -L$$OUT_PWD/../RpgDll/GameMaster/$$FINALDIR -lGameMaster
+LIBS += -L$$OUT_PWD/../RpgDll/MainRpg/$$FINALDIR -lMainRpg
 
-INCLUDEPATH += $${PWD}/DesignLibrary/DesignPattern $${PWD}/DiceRoller/Dice $${PWD}/ExpressionLibrary/LibExpression/Core $${PWD}/ExpressionLibrary/LibExpression/Operation
-INCLUDEPATH += $${PWD}/GraphLibrary/GraphLib
+INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpression/Core $${PWD}/../ExpressionLibrary/LibExpression/Operation
+INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
 
 #DEPENDPATH += $$OUT_PWD/../DiceRoller/Dice $${OUT_PWD}/../GraphLibrary/GraphLib $${OUT_PWD}/../ExpressionLibrary/LibExpression $${OUT_PWD}/../DesignLibrary/DesignPattern
 

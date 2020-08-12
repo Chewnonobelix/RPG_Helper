@@ -4,20 +4,28 @@
 #include <QtCore/QObject>
 #include <QtCore/qglobal.h>
 
-#include <QtSql/QSqlDatabase>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QFile>
+#include <QDomDocument>
+#include <QDomElement>
 #include "interfacedatasave.h"
+#include "../MainRpg_global.h"
 
-class SqlDataBase : public InterfaceDataSave
+class MAINRPG_EXPORT SqlDataBase : public InterfaceDataSave
 {
     Q_OBJECT
 private:
     QSqlDatabase m_db;
 
 public:
-    explicit SqlDataBase(QObject *parent = nullptr);
+    SqlDataBase();
     ~SqlDataBase();
 
-    QList<CreaturePointer> selectCreature(QList<QUuid>) const;
+    bool init();
+
+    QMap<QUuid, CreaturePointer> selectCreature(QList<QUuid> = QList<QUuid>()) const;
     bool removeCreature(CreaturePointer);
     bool updateCreature(CreaturePointer);
     bool addCreature(CreaturePointer);
