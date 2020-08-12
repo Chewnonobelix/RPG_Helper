@@ -2,8 +2,10 @@
 #define MAINCONTROLLER_H
 
 #include <QtCore/qglobal.h>
+#include "abstractcontroller.h"
+#include "MainRpg_global.h"
 
-class MainController : public AbstractController
+class MAINRPG_EXPORT MainController : public AbstractController
 {
     Q_OBJECT
 public:
