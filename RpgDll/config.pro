@@ -15,4 +15,4 @@ LIBS += -L$$OUT_PWD/../../DesignLibrary/DesignPattern/$$FINALDIR -lDesignPattern
 
 CONFIG += c++17
 
-QT += core widgets quick xml gui
+QT += core widgets quick xml gui network
