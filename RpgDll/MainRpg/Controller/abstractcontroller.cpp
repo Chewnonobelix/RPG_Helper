@@ -19,7 +19,6 @@ void AbstractController::setDb(InterfaceDataSave * i)
 
     m_db = i;
 
-    qDebug()<<m_db;
     try
     {
     if(m_db)
