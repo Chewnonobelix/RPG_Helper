@@ -109,4 +109,56 @@
 	DELETE FROM creature
 	WHERE id=:id 
 	</request>
+	
+	<request name = "selectRule">
+	SELECT * FROM rule
+	</request>
+	<request name="updateRule">
+	UPDATE rule
+	SET name=:name, description=:description 
+	WHERE id=:id 
+	</request>
+	<request name="insertRule">
+	INSERT INTO rule (id, name, description) 
+	VALUES (:id, :name, :description) 
+	</request>
+	<request name="removeRule">
+	DELETE FROM rule
+	WHERE id=:id 
+	</request>
+	
+	<request name = "selectObject">
+	SELECT * FROM item
+	</request>
+	<request name="updateObject">
+	UPDATE item
+	SET name=:name
+	WHERE id=:id 
+	</request>
+	<request name="insertObject">
+	INSERT INTO item (id, name) 
+	VALUES (:id, :name) 
+	</request>
+	<request name="removeObject">
+	DELETE FROM item
+	WHERE id=:id 
+	</request>
+
+	<request name = "selectWeapon">
+	SELECT * FROM weapon
+	</request>
+	<request name="updateWeapon">
+	UPDATE weapon
+	SET damage=:damage
+	WHERE id=:id 
+	</request>
+	<request name="insertWeapon">
+	INSERT INTO weapon (id, damage) 
+	VALUES (:id, :damage) 
+	</request>
+	<request name="removeWeapon">
+	DELETE FROM weapon
+	WHERE id=:id 
+	</request>
+
 </req>
