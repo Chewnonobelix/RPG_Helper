@@ -100,9 +100,12 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
     return ret;
 }
 
-bool SqlDataBase::removeCreature(CreaturePointer)
+bool SqlDataBase::removeCreature(CreaturePointer c)
 {
-    return false;
+    auto& req = m_queries["removeCreature"];
+    req.bindValue(":id", c->id());
+    bool ret = req.exec();
+    return ret;
 }
 
 bool SqlDataBase::updateCreature(CreaturePointer)
