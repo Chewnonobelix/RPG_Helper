@@ -161,7 +161,7 @@ void TestSql::test_selectOneRule()
 
 void TestSql::test_updateRule()
 {
-    c2->setName(name+"1");
+    r2->setName(name+"1");
     QCOMPARE(model->updateRule(r2), true);
     QCOMPARE(model->selectRule({r2->id()}).first()->name(), name+"1");
 }
