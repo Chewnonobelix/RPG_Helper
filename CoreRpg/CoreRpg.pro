@@ -39,6 +39,7 @@ INCLUDEPATH += $$PWD/../RpgDll/Bestiary $$PWD/../RpgDll/MainRpg
 #DEPENDPATH += $$OUT_PWD/../RpgDll/GameMaster
 LIBS += -L$$OUT_PWD/../RpgDll/GameMaster/$$FINALDIR -lGameMaster
 LIBS += -L$$OUT_PWD/../RpgDll/MainRpg/$$FINALDIR -lMainRpg
+LIBS += -L$$OUT_PWD/../RpgDll/Bestiary/$$FINALDIR -lBestiary
 
 INCLUDEPATH += $${PWD}/../DesignLibrary/DesignPattern $${PWD}/../DiceRoller/Dice $${PWD}/../ExpressionLibrary/LibExpression/Core $${PWD}/../ExpressionLibrary/LibExpression/Operation
 INCLUDEPATH += $${PWD}/../GraphLibrary/GraphLib
