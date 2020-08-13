@@ -108,9 +108,16 @@ bool SqlDataBase::removeCreature(CreaturePointer c)
     return ret;
 }
 
-bool SqlDataBase::updateCreature(CreaturePointer)
+bool SqlDataBase::updateCreature(CreaturePointer c)
 {
-    return false;
+    auto& req = m_queries["updateCreature"];
+    req.bindValue(":name", c->name());
+    req.bindValue(":race", c->race());
+    req.bindValue(":description", c->description());
+    req.bindValue(":id", c->id());
+
+    bool ret = req.exec();
+    return ret;
 }
 
 bool SqlDataBase::addCreature(CreaturePointer c)
