@@ -154,24 +154,57 @@ bool SqlDataBase::addCreature(CreaturePointer c)
     return true;
 }
 
-QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid>)
+QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid> ids)
 {
-    return QMap<QUuid, RulePointer>();
+    auto& req = m_queries["selectRule"];
+
+    req.exec();
+    QMap<QUuid, RulePointer> ret;
+    while(req.next())
+    {
+        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+            continue;
+
+        RulePointer r = AbstractRule::createGeneric();
+        r->setId(req.value("id").toUuid());
+        r->setName(req.value("name").toString());
+        r->setDescription(req.value("description").toString());
+
+        ret[r->id()] = r;
+    }
+    return ret;
 }
 
-bool SqlDataBase::removeRule(RulePointer)
+bool SqlDataBase::removeRule(RulePointer r)
 {
-    return false;
+    auto& req = m_queries["removeRule"];
+
+    req.bindValue(":id", r->id());
+
+    return req.exec();
 }
 
-bool SqlDataBase::updateRule(RulePointer)
+bool SqlDataBase::updateRule(RulePointer r)
 {
-    return false;
+    auto& req = m_queries["updateRule"];
+
+    req.bindValue(":id", r->id());
+    req.bindValue(":name", r->name());
+    req.bindValue(":description", r->description());
+    return req.exec();
 }
 
-bool SqlDataBase::addRule(RulePointer)
+bool SqlDataBase::addRule(RulePointer r)
 {
-    return false;
+    if(r->id().isNull())
+        r->setId(QUuid::createUuid());
+
+    auto& req = m_queries["insertRule"];
+    req.bindValue(":id", r->id());
+    req.bindValue(":name", r->name());
+    req.bindValue(":description", r->description());
+
+    return req.exec();
 }
 
 QMap<QUuid, ObjectPointer> SqlDataBase::selectItem(QList<QUuid>)
