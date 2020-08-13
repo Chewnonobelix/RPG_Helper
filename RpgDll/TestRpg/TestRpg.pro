@@ -1,9 +1,11 @@
 TEMPLATE = subdirs
 
+CONFIG += ordered
+
 SUBDIRS += \
     TestBonus \
-    TestCreature \
     TestItem \
+    TestWeapon \
     TestPc \
-    TestSql \
-    TestWeapon
+    TestCreature \
+    TestSql
