@@ -27,10 +27,11 @@ public:
 
     bool init();
 
-    QMap<QUuid, CreaturePointer> selectCreature(QList<QUuid> = QList<QUuid>());
-    bool removeCreature(CreaturePointer);
-    bool updateCreature(CreaturePointer);
-    bool addCreature(CreaturePointer);
+    QMap<QUuid, CreaturePointer> selectCreature(QList<QUuid> = QList<QUuid>()) override;
+    bool removeCreature(CreaturePointer) override;
+    bool updateCreature(CreaturePointer) override;
+    bool addCreature(CreaturePointer) override;
+
     QMap<QUuid, RulePointer> selectRule(QList<QUuid> = QList<QUuid>()) override;
     bool removeRule(RulePointer) override;
     bool updateRule(RulePointer) override;
