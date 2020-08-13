@@ -153,3 +153,23 @@ bool SqlDataBase::addCreature(CreaturePointer c)
 
     return true;
 }
+
+QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid>)
+{
+    return QMap<QUuid, RulePointer>();
+}
+
+bool SqlDataBase::removeRule(RulePointer)
+{
+    return false;
+}
+
+bool SqlDataBase::updateRule(RulePointer)
+{
+    return false;
+}
+
+bool SqlDataBase::addRule(RulePointer)
+{
+    return false;
+}

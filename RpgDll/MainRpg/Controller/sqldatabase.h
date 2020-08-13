@@ -31,6 +31,10 @@ public:
     bool removeCreature(CreaturePointer);
     bool updateCreature(CreaturePointer);
     bool addCreature(CreaturePointer);
+    QMap<QUuid, RulePointer> selectRule(QList<QUuid> = QList<QUuid>()) override;
+    bool removeRule(RulePointer) override;
+    bool updateRule(RulePointer) override;
+    bool addRule(RulePointer) override;
 
 signals:
 

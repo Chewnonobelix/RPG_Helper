@@ -17,6 +17,9 @@ public:
     virtual bool updateCreature(CreaturePointer) = 0;
     virtual bool addCreature(CreaturePointer) = 0;
 
+    virtual QMap<QUuid, RulePointer> selectRule(QList<QUuid> = QList<QUuid>()) = 0;
+    virtual bool removeRule(RulePointer) = 0;
+    virtual bool updateRule(RulePointer) = 0;
     virtual bool init() = 0;
 };
 #endif // INTERFACEDATASAVE_H
