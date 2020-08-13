@@ -5,4 +5,5 @@ SUBDIRS += \
     TestCreature \
     TestItem \
     TestPc \
+    TestSql \
     TestWeapon

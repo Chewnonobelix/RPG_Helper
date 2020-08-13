@@ -1,9 +1,6 @@
-QT += testlib
-QT -= gui
+include(../testconfig.pro)
 
-CONFIG += qt console warn_on depend_includepath testcase
-CONFIG -= app_bundle
-
-TEMPLATE = app
+DEFINES += REQFILE=\\\"$${PWD}/../../MainRpg/genericinit.rec\\\"
 
 SOURCES +=  tst_testsql.cpp
+

@@ -17,7 +17,7 @@ private slots:
 
 TestSql::TestSql()
 {
-
+    qDebug()<<QString(REQFILE)<<QFile::exists(QString(REQFILE));
 }
 
 TestSql::~TestSql()
