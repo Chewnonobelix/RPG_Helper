@@ -60,12 +60,8 @@
 	END;
 	</trigger>
 
-	<request name = "selectAllCreature">
+	<request name = "selectCreature">
 	SELECT * FROM creature
-	</request>
-	<request name = "selectOneCreature">
-	SELECT * FROM creature 
-	WHERE id=:id
 	</request>
 	<request name = "selectCreatureCarac">
 	SELECT * FROM creature_carac 
@@ -81,11 +77,13 @@
 	SET name=:name, description=:description, race=:race 
 	WHERE id=:id 
 	</request>
+	
 	<request name="updateCreatureAssociation">
 	UPDATE creature_association
 	SET item=:item, weapon=:weapon, rule=:rule  
 	WHERE id=:id 
 	</request>
+	
 	<request name="updateCreatureCarac">
 	UPDATE creature_carac
 	SET value=:value  
@@ -96,13 +94,14 @@
 	INSERT INTO creature (id, name, race, description) 
 	VALUES (:id, :name, :race, :description) 
 	</request>
+	
 	<request name="insertCreatureAssociation">
 	INSERT INTO creature_association (id, item, weapon, rule) 
 	VALUES (:id, :item, :weapon, :rule) 
 	</request>
+	
 	<request name="insertCreatureCarac">
 	INSERT INTO creature_carac (id, name, value) 
 	VALUES (:id, :name, :value) 
 	</request>
-	
 </req>
