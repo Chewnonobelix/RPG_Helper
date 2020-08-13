@@ -207,43 +207,107 @@ bool SqlDataBase::addRule(RulePointer r)
     return req.exec();
 }
 
-QMap<QUuid, ObjectPointer> SqlDataBase::selectItem(QList<QUuid>)
+QMap<QUuid, ObjectPointer> SqlDataBase::selectItem(QList<QUuid> ids)
 {
-    return QMap<QUuid, ObjectPointer>();
+    auto& req = m_queries["selectObject"];
+
+    req.exec();
+    QMap<QUuid, ObjectPointer> ret;
+    while(req.next())
+    {
+        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+            continue;
+
+        ObjectPointer r = AbstractObject::createGeneric();
+        r->setId(req.value("id").toUuid());
+        r->setName(req.value("name").toString());
+
+        ret[r->id()] = r;
+    }
+    return ret;
 }
 
-bool SqlDataBase::removeItem(ObjectPointer)
+bool SqlDataBase::removeItem(ObjectPointer o)
 {
-    return false;
+    auto& req = m_queries["removeObject"];
+
+    req.bindValue(":id", o->id());
+
+    return req.exec();
 }
 
-bool SqlDataBase::updateItem(ObjectPointer)
+bool SqlDataBase::updateItem(ObjectPointer o)
 {
-    return false;
+    auto& req = m_queries["updateObject"];
+
+    req.bindValue(":id", o->id());
+    req.bindValue(":name", o->name());
+    return req.exec();
 }
 
-bool SqlDataBase::addItem(ObjectPointer)
+bool SqlDataBase::addItem(ObjectPointer o)
 {
-    return false;
+    if(o->id().isNull())
+        o->setId(QUuid::createUuid());
+
+    auto& req = m_queries["insertObject"];
+    req.bindValue(":id", o->id());
+    req.bindValue(":name", o->name());
+
+    return req.exec();
 }
 
-QMap<QUuid, WeaponPointer> SqlDataBase::selectWeapon(QList<QUuid>)
+QMap<QUuid, WeaponPointer> SqlDataBase::selectWeapon(QList<QUuid> ids)
 {
-    return QMap<QUuid, WeaponPointer>();
+    QMap<QUuid, WeaponPointer> ret;
+    auto items = selectItem(ids);
+    auto req = m_queries["selectWeapon"];
+    req.exec();
+    while(req.next())
+    {
+        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+            continue;
+
+        WeaponPointer w = AbstractWeapon::createGeneric();
+        w->setDamage(req.value("damage").toString());
+        w->setId(req.value("id").toUuid());
+        w->setName(items[w->id()]->name());
+
+        ret[w->id()] = w;
+    }
+
+    return ret;
 }
 
-bool SqlDataBase::removeWeapon(WeaponPointer)
+bool SqlDataBase::removeWeapon(WeaponPointer w)
 {
-    return false;
+    return removeItem(w);
 }
 
-bool SqlDataBase::updateWeapon(WeaponPointer)
+bool SqlDataBase::updateWeapon(WeaponPointer w)
 {
-    return false;
+    bool ret = updateItem(w);
+    if(!ret)
+        return ret;
+
+    auto& req = m_queries["updateWeapon"];
+
+    req.bindValue(":id", w->id());
+    req.bindValue(":damage", w->damage());
+    return req.exec();
 }
 
-bool SqlDataBase::addWeapon(WeaponPointer)
+bool SqlDataBase::addWeapon(WeaponPointer w)
 {
-    return false;
+    bool ret = addItem(w);
+
+    if(!ret)
+        return ret;
+
+    auto& req = m_queries["insertWeapon"];
+    req.bindValue(":id", w->id());
+    req.bindValue(":damage", w->damage());
+
+    return req.exec();
 }
 
