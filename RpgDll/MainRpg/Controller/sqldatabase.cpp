@@ -55,9 +55,47 @@ bool SqlDataBase::init()
     return true;
 }
 
-QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid>)
+QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
 {
-    return QMap<QUuid, CreaturePointer>();
+    auto& carac = m_queries["selectCreatureCarac"];
+    auto& assoc = m_queries["selectCreatureAssoc"];
+    auto& creat = m_queries["selectCreature"];
+
+    creat.exec();
+    QMap<QUuid, CreaturePointer> ret;
+
+    while (creat.next())
+    {
+        if(!ids.isEmpty() && !ids.contains(creat.value("id").toUuid()))
+            continue;
+
+        CreaturePointer c = AbstractCreature::createGeneric();
+        c->setId(creat.value("id").toUuid());
+        c->setName(creat.value("name").toString());
+        c->setRace(creat.value("race").toString());
+        c->setDescription(creat.value("description").toString());
+
+        ret[c->id()] = c;
+
+        carac.bindValue(":id", c->id());
+
+        while(carac.next())
+            c->setCharacteristics(carac.value("name").toString(), carac.value("value").toDouble());
+
+        assoc.bindValue(":id", c->id());
+
+        while(assoc.next())
+        {
+            if(!assoc.value("item").isNull())
+                qDebug()<<"Load item";
+            if(!assoc.value("rule").isNull())
+                qDebug()<<"Load rule";
+            if(!assoc.value("item").isNull())
+                qDebug()<<"Load weapon";
+        }
+    }
+
+    return ret;
 }
 
 bool SqlDataBase::removeCreature(CreaturePointer)
@@ -70,7 +108,36 @@ bool SqlDataBase::updateCreature(CreaturePointer)
     return false;
 }
 
-bool SqlDataBase::addCreature(CreaturePointer)
+bool SqlDataBase::addCreature(CreaturePointer c)
 {
-    return false;
+    if(c->id().isNull())
+        c->setId(QUuid::createUuid());
+
+    auto& insertCreat = m_queries["insertCreature"];
+    auto& insertCarac = m_queries["insertCreatureCarac"];
+    auto& insertAssoc = m_queries["insertCreatureAssociation"];
+
+    insertCreat.bindValue(":id", c->id());
+    insertCreat.bindValue(":race", c->race());
+    insertCreat.bindValue(":description", c->description());
+    insertCreat.bindValue(":name", c->name());
+
+    if(!insertCreat.exec())
+    {
+        qDebug()<<"Insert creat"<<insertCreat.lastError();
+        return false;
+    }
+
+    for(auto it: c->characteristicsList())
+    {
+        insertCarac.bindValue(":id", c->id());
+        insertCarac.bindValue(":name", it);
+        insertCarac.bindValue(":value", c->characteristics(it));
+
+        if(!insertCarac.exec())
+            qDebug()<<"Insert carac"<<insertCarac.boundValues()<<insertCarac.lastError();
+
+    }
+
+    return true;
 }
