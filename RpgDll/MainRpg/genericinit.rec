@@ -14,7 +14,7 @@
 	<trigger name="delete_weapon">
 	CREATE TRIGGER delete_weapon BEFORE DELETE ON item 
 	BEGIN 
-	DELETE FROM weapon WHERE if=OLD.id;
+	DELETE FROM weapon WHERE id=OLD.id;
 	END;
 	</trigger>
 	
@@ -114,7 +114,7 @@
 	SELECT * FROM rule
 	</request>
 	<request name="updateRule">
-	UPDATE rule
+	UPDATE rule 
 	SET name=:name, description=:description 
 	WHERE id=:id 
 	</request>
