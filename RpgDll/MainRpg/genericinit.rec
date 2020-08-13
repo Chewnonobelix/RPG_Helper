@@ -55,8 +55,8 @@
 	<trigger name="delete_creature">
 	CREATE TRIGGER delete_creature BEFORE DELETE ON creature 
 	BEGIN 
-	DELETE FROM creature_association WHERE if=OLD.id;
-	DELETE FROM creature_carac WHERE if=OLD.id;
+	DELETE FROM creature_association WHERE id=OLD.id;
+	DELETE FROM creature_carac WHERE id=OLD.id;
 	END;
 	</trigger>
 
@@ -103,5 +103,10 @@
 	<request name="insertCreatureCarac">
 	INSERT INTO creature_carac (id, name, value) 
 	VALUES (:id, :name, :value) 
+	</request>
+	
+	<request name="removeCreature">
+	DELETE FROM creature
+	WHERE id=:id 
 	</request>
 </req>
