@@ -193,3 +193,24 @@ bool SqlDataBase::addItem(ObjectPointer)
 {
     return false;
 }
+
+QMap<QUuid, WeaponPointer> SqlDataBase::selectWeapon(QList<QUuid>)
+{
+    return QMap<QUuid, WeaponPointer>();
+}
+
+bool SqlDataBase::removeWeapon(WeaponPointer)
+{
+    return false;
+}
+
+bool SqlDataBase::updateWeapon(WeaponPointer)
+{
+    return false;
+}
+
+bool SqlDataBase::addWeapon(WeaponPointer)
+{
+    return false;
+}
+

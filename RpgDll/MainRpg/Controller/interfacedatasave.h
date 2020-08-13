@@ -27,6 +27,11 @@ public:
     virtual bool updateItem(ObjectPointer) = 0;
     virtual bool addItem(ObjectPointer) = 0;
 
+    virtual QMap<QUuid, WeaponPointer> selectWeapon(QList<QUuid> = QList<QUuid>()) = 0;
+    virtual bool removeWeapon(WeaponPointer) = 0;
+    virtual bool updateWeapon(WeaponPointer) = 0;
+    virtual bool addWeapon(WeaponPointer) = 0;
+
     virtual bool init() = 0;
 };
 #endif // INTERFACEDATASAVE_H

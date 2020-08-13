@@ -41,6 +41,11 @@ public:
     bool updateItem(ObjectPointer) override;
     bool addItem(ObjectPointer) override;
 
+    QMap<QUuid, WeaponPointer> selectWeapon(QList<QUuid> = QList<QUuid>()) override;
+    bool removeWeapon(WeaponPointer) override;
+    bool updateWeapon(WeaponPointer) override;
+    bool addWeapon(WeaponPointer) override;
+
 signals:
 
 };
