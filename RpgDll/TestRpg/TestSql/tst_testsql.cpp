@@ -78,6 +78,8 @@ void TestSql::initTestCase()
     o1->setName(name);
     o2->setName(name);
 
+    w1->setName(name);
+    w2->setName(name);
     w1->setDamage(damage);
     w2->setDamage(damage);
 }
