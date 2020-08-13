@@ -173,3 +173,23 @@ bool SqlDataBase::addRule(RulePointer)
 {
     return false;
 }
+
+QMap<QUuid, ObjectPointer> SqlDataBase::selectItem(QList<QUuid>)
+{
+    return QMap<QUuid, ObjectPointer>();
+}
+
+bool SqlDataBase::removeItem(ObjectPointer)
+{
+    return false;
+}
+
+bool SqlDataBase::updateItem(ObjectPointer)
+{
+    return false;
+}
+
+bool SqlDataBase::addItem(ObjectPointer)
+{
+    return false;
+}

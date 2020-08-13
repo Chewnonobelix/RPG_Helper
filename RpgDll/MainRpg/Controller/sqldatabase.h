@@ -36,6 +36,11 @@ public:
     bool updateRule(RulePointer) override;
     bool addRule(RulePointer) override;
 
+    QMap<QUuid, ObjectPointer> selectItem(QList<QUuid> = QList<QUuid>()) override;
+    bool removeItem(ObjectPointer) override;
+    bool updateItem(ObjectPointer) override;
+    bool addItem(ObjectPointer) override;
+
 signals:
 
 };

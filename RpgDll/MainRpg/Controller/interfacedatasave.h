@@ -20,6 +20,13 @@ public:
     virtual QMap<QUuid, RulePointer> selectRule(QList<QUuid> = QList<QUuid>()) = 0;
     virtual bool removeRule(RulePointer) = 0;
     virtual bool updateRule(RulePointer) = 0;
+    virtual bool addRule(RulePointer) = 0;
+
+    virtual QMap<QUuid, ObjectPointer> selectItem(QList<QUuid> = QList<QUuid>()) = 0;
+    virtual bool removeItem(ObjectPointer) = 0;
+    virtual bool updateItem(ObjectPointer) = 0;
+    virtual bool addItem(ObjectPointer) = 0;
+
     virtual bool init() = 0;
 };
 #endif // INTERFACEDATASAVE_H
