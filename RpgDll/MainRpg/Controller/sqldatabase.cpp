@@ -14,7 +14,8 @@ SqlDataBase::~SqlDataBase()
 
 bool SqlDataBase::init()
 {
-    QFile f("genericinit.rec");
+    QString filename = QFile::exists("genericinit.rec") ? "genericinit.rec" : REQFILE;
+    QFile f(filename);
     bool ret = f.open(QIODevice::ReadOnly);
     if(!ret)
         throw QString("Cannot find " + f.fileName());
@@ -50,7 +51,7 @@ bool SqlDataBase::init()
         m_queries[el.attribute("name")] = QSqlQuery(req, m_db);
     }
 
-    qDebug()<<"Req"<<m_queries.keys();
+    qDebug()<<"Req"<<m_queries.keys()<<m_db.isOpen();
 
     return true;
 }
@@ -124,7 +125,7 @@ bool SqlDataBase::addCreature(CreaturePointer c)
 
     if(!insertCreat.exec())
     {
-        qDebug()<<"Insert creat"<<insertCreat.lastError();
+        qDebug()<<"Insert creat"<<insertCreat.lastError()<<insertCreat.lastQuery()<<insertCreat.boundValues();
         return false;
     }
 
