@@ -48,7 +48,8 @@ bool SqlDataBase::init()
     {
         QDomElement el = in.at(i).toElement();
         QString req = el.text();
-        m_queries[el.attribute("name")] = QSqlQuery(req, m_db);
+        m_queries[el.attribute("name")] = QSqlQuery(m_db);
+        m_queries[el.attribute("name")].prepare(req);
     }
 
     qDebug()<<"Req"<<m_queries.keys()<<m_db.isOpen();
