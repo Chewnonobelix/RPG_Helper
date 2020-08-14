@@ -145,7 +145,7 @@ void TestSql::test_updateCreature()
     QCOMPARE(model->selectCreature({c2->id()}).first()->characteristics(carac1), value1+2);
 
     QCOMPARE(model->selectCreature({c2->id()}).first()->ruleSet("testrule"), {r1});
-    QCOMPARE(model->selectCreature({c2->id()}).first()->itemSet("testitem"), {o2});
+    QCOMPARE(model->selectCreature({c2->id()}).first()->itemSet("testitem"), {o1});
     QCOMPARE(model->selectCreature({c2->id()}).first()->weapons(), {w1});
 }
 
