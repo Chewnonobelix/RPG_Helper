@@ -38,5 +38,9 @@ LIBS += -L$$OUT_PWD/../Bestiary/$$FINALDIR -lBestiary
 
 DISTFILES += \
     View/Main.qml \
+    View/PnjView.qml \
     genericinit.rec
+
+RESOURCES += \
+    View/View.qrc
 
