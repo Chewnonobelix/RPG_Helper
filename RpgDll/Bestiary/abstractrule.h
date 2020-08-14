@@ -36,9 +36,14 @@ public:
     QString description() const;
     void setDescription(QString);
     
+    virtual void setMetadata(QString , QString );
+    virtual QString metaData(QString) const;
+    virtual QStringList metadataList() const;
+
 signals:
     void s_name(QString);
     void s_description(QString);
+    void s_metadata(QString, QString);
 };
 
 typedef QSharedPointer<AbstractRule> RulePointer;

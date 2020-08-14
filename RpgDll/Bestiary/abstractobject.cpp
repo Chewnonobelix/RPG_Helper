@@ -3,8 +3,8 @@
 
 AbstractObject::AbstractObject(): QObject(nullptr)
 {
-	setId(QUuid());
-	setName(QString());
+    setId(QUuid());
+    setName(QString());
 }
 
 AbstractObject::AbstractObject(const AbstractObject& ao): QObject(nullptr), MetaData(ao)
@@ -19,28 +19,28 @@ AbstractObject::~AbstractObject()
 
 QUuid AbstractObject::id() const
 {
-        return metaData<QUuid>("id");
+    return MetaData::metaData<QUuid>("id");
 }
 
 void AbstractObject::setId(QUuid i)
 {
-	setMetadata("id", i);
+    MetaData::setMetadata("id", i);
 }
 
 QString AbstractObject::name() const
 {
-    return metaData<QString>("name");
+    return MetaData::metaData<QString>("name");
 }
 
 void AbstractObject::setName(const QString &name)
 {
-    setMetadata("name", name);
+    MetaData::setMetadata("name", name);
     emit s_name(name);
 }
 
 bool AbstractObject::operator <(const AbstractObject& ao) const
 {
-    return name() < ao.name();    
+    return name() < ao.name();
 }
 
 bool AbstractObject::operator ==(const AbstractObject& ao) const
@@ -52,6 +52,27 @@ AbstractObject& AbstractObject::operator =(const AbstractObject& ao)
 {
     MetaData::operator =(ao);
     return *this;
+}
+
+void AbstractObject::setMetadata(QString key, QString value)
+{
+    //    QSet<QString> keys;
+    //    keys<<"description"<<"name"<<"id";
+    //    if(keys.contains(key))
+    //        return;
+
+    //    MetaData::setMetadata(key, value);
+    //    emit s_metadata(key, value);
+}
+
+QString AbstractObject::metaData(QString) const
+{
+    return QString();
+}
+
+QStringList AbstractObject::metadataList() const
+{
+    return QStringList();
 }
 
 class GenericObject: public AbstractObject

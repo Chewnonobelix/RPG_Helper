@@ -29,34 +29,55 @@ bool AbstractRule::operator <(const AbstractRule& ab) const
 
 QUuid AbstractRule::id() const
 {
-	return metaData<QUuid>("id");
+    return MetaData::metaData<QUuid>("id");
 }
 
 void AbstractRule::setId(QUuid i)
 {
-	setMetadata("id", i);
+    MetaData::setMetadata("id", i);
 }
 
 QString AbstractRule::name() const
 {
-    return metaData<QString>("name");
+    return MetaData::metaData<QString>("name");
 }
 
 void AbstractRule::setName(QString n) 
 {
-    setMetadata("name", n);
+    MetaData::setMetadata("name", n);
     emit s_name(name());
 }
 
 QString AbstractRule::description() const
 {
-    return metaData<QString>("description");
+    return MetaData::metaData<QString>("description");
 }
 
 void AbstractRule::setDescription(QString d)
 {
-    setMetadata("description", d);
+    MetaData::setMetadata("description", d);
     emit s_description(description());
+}
+
+void AbstractRule::setMetadata(QString key, QString value)
+{
+//    QSet<QString> keys;
+//    keys<<"description"<<"name"<<"id";
+//    if(keys.contains(key))
+//        return;
+
+//    MetaData::setMetadata(key, value);
+//    emit s_metadata(key, value);
+}
+
+QString AbstractRule::metaData(QString) const
+{
+    return QString();
+}
+
+QStringList AbstractRule::metadataList() const
+{
+    return QStringList();
 }
 
 class GenericRule: public AbstractRule
