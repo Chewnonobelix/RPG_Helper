@@ -158,6 +158,44 @@ bool SqlDataBase::insertAssociation(CreaturePointer c)
     auto& insertAssoc = m_queries["insertCreatureAssociation"];
     bool ret = true;
 
+    for(auto it: c->ruleTypeList())
+    {
+        for(auto it2: c->ruleSet(it))
+        {
+            insertAssoc.bindValue(":id", c->id());
+            insertAssoc.bindValue(":typeName", it);
+            insertAssoc.bindValue(":rule", it2->id());
+            insertAssoc.bindValue(":item", QVariant());
+            insertAssoc.bindValue(":weapon", QVariant());
+
+            ret &= insertAssoc.exec();
+        }
+    }
+    for(auto it: c->itemTypeList())
+    {
+        if(it == "weapon")
+            continue;
+
+        for(auto it2: c->itemSet(it))
+        {
+            insertAssoc.bindValue(":id", c->id());
+            insertAssoc.bindValue(":typeName", it);
+            insertAssoc.bindValue(":rule", QVariant());
+            insertAssoc.bindValue(":item", it2->id());
+            insertAssoc.bindValue(":weapon", QVariant());
+            ret &= insertAssoc.exec();
+        }
+    }
+
+    for(auto it: c->weapons())
+    {
+        insertAssoc.bindValue(":id", c->id());
+        insertAssoc.bindValue(":rule", QVariant());
+        insertAssoc.bindValue(":item", QVariant());
+        insertAssoc.bindValue(":weapon", it->id());
+        ret &= insertAssoc.exec();
+    }
+
     return ret;
 }
 
