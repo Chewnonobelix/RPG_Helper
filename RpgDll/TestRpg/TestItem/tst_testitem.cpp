@@ -9,6 +9,8 @@ class TestItem : public QObject
 private:
     const QString name1 = "name1";
 	const QUuid id1 = QUuid::createUuid();
+    const QString metaKey1 = "metaKey1";
+    const QString metaValue1 = "metaValue1";
     QSharedPointer<AbstractObject> copy, model;
 
 public:
@@ -18,6 +20,7 @@ public:
 private slots:
     void test_id();
     void test_name();
+    void test_metadata();
     void test_copy_consttructor();
     void test_equality();
     void test_inferior();
@@ -47,6 +50,18 @@ void TestItem::test_name()
     model->setName(name1);
     QCOMPARE(model->name(), name1);
     QCOMPARE(spy.count(), 1);
+}
+
+void TestItem::test_metadata()
+{
+    QSignalSpy spy(model.data(), SIGNAL(s_metadata(QString,QString)));
+    QVERIFY(model->metaData(metaKey1) != metaValue1);
+    model->setMetadata(metaKey1, metaValue1);
+    QCOMPARE(model->metaData(metaKey1), metaValue1);
+    QCOMPARE(spy.count(), 1);
+    model->setMetadata("name", metaValue1);
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(model->metadataList(), {metaKey1});
 }
 
 void TestItem::test_copy_consttructor()
