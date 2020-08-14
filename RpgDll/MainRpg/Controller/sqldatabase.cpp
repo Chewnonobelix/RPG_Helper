@@ -64,11 +64,10 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
     auto& creat = m_queries["selectCreature"];
 
     creat.exec();
-    QMap<QUuid, CreaturePointer> ret;
 
     while (creat.next())
     {
-        if(!ids.isEmpty() && !ids.contains(creat.value("id").toUuid()))
+        if(m_creatures.contains(creat.value("id").toUuid()))
             continue;
 
         CreaturePointer c = AbstractCreature::createGeneric();
@@ -77,7 +76,7 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
         c->setRace(creat.value("race").toString());
         c->setDescription(creat.value("description").toString());
 
-        ret[c->id()] = c;
+        m_creatures[c->id()] = c;
 
         carac.bindValue(":id", c->id());
 
@@ -108,6 +107,12 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
         }
     }
 
+    QMap<QUuid, CreaturePointer> ret;
+    for(auto it: ids)
+        ret[it] = m_creatures[it];
+
+    return ids.isEmpty() ? m_creatures : ret;
+
     return ret;
 }
 
@@ -116,6 +121,8 @@ bool SqlDataBase::removeCreature(CreaturePointer c)
     auto& req = m_queries["removeCreature"];
     req.bindValue(":id", c->id());
     bool ret = req.exec();
+    m_creatures.remove(c->id());
+
     return ret;
 }
 
@@ -140,6 +147,7 @@ bool SqlDataBase::addCreature(CreaturePointer c)
 {
     if(c->id().isNull())
         c->setId(QUuid::createUuid());
+    m_creatures[c->id()] = c;
 
     auto& insertCreat = m_queries["insertCreature"];
 
@@ -233,10 +241,10 @@ QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid> ids)
     auto& req = m_queries["selectRule"];
 
     req.exec();
-    QMap<QUuid, RulePointer> ret;
+
     while(req.next())
     {
-        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+        if(m_rules.contains(req.value("id").toUuid()))
             continue;
 
         RulePointer r = AbstractRule::createGeneric();
@@ -244,9 +252,13 @@ QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid> ids)
         r->setName(req.value("name").toString());
         r->setDescription(req.value("description").toString());
 
-        ret[r->id()] = r;
+        m_rules[r->id()] = r;
     }
-    return ret;
+    QMap<QUuid, RulePointer> ret;
+    for(auto it: ids)
+        ret[it] = m_rules[it];
+
+    return ids.isEmpty() ? m_rules : ret;
 }
 
 bool SqlDataBase::removeRule(RulePointer r)
@@ -254,7 +266,7 @@ bool SqlDataBase::removeRule(RulePointer r)
     auto& req = m_queries["removeRule"];
 
     req.bindValue(":id", r->id());
-
+    m_rules.remove(r->id());
     return req.exec();
 }
 
@@ -273,6 +285,7 @@ bool SqlDataBase::addRule(RulePointer r)
     if(r->id().isNull())
         r->setId(QUuid::createUuid());
 
+    m_rules[r->id()] = r;
     auto& req = m_queries["insertRule"];
     req.bindValue(":id", r->id());
     req.bindValue(":name", r->name());
@@ -286,19 +299,24 @@ QMap<QUuid, ObjectPointer> SqlDataBase::selectItem(QList<QUuid> ids)
     auto& req = m_queries["selectObject"];
 
     req.exec();
-    QMap<QUuid, ObjectPointer> ret;
+
     while(req.next())
     {
-        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+        if(m_item.contains(req.value("id").toUuid()))
             continue;
 
         ObjectPointer r = AbstractObject::createGeneric();
         r->setId(req.value("id").toUuid());
         r->setName(req.value("name").toString());
 
-        ret[r->id()] = r;
+        m_item[r->id()] = r;
     }
-    return ret;
+
+    QMap<QUuid, ObjectPointer> ret;
+    for(auto it: ids)
+        ret[it] = m_item[it];
+
+    return ids.isEmpty() ? m_item : ret;
 }
 
 bool SqlDataBase::removeItem(ObjectPointer o)
@@ -306,7 +324,7 @@ bool SqlDataBase::removeItem(ObjectPointer o)
     auto& req = m_queries["removeObject"];
 
     req.bindValue(":id", o->id());
-
+    m_item.remove(o->id());
     return req.exec();
 }
 
@@ -323,6 +341,7 @@ bool SqlDataBase::addItem(ObjectPointer o)
 {
     if(o->id().isNull())
         o->setId(QUuid::createUuid());
+    m_item[o->id()] = o;
 
     auto& req = m_queries["insertObject"];
     req.bindValue(":id", o->id());
@@ -333,13 +352,12 @@ bool SqlDataBase::addItem(ObjectPointer o)
 
 QMap<QUuid, WeaponPointer> SqlDataBase::selectWeapon(QList<QUuid> ids)
 {
-    QMap<QUuid, WeaponPointer> ret;
     auto items = selectItem(ids);
     auto req = m_queries["selectWeapon"];
     req.exec();
     while(req.next())
     {
-        if(!ids.isEmpty() && !ids.contains(req.value("id").toUuid()))
+        if(m_weapon.contains(req.value("id").toUuid()))
             continue;
 
         WeaponPointer w = AbstractWeapon::createGeneric();
@@ -347,14 +365,20 @@ QMap<QUuid, WeaponPointer> SqlDataBase::selectWeapon(QList<QUuid> ids)
         w->setId(req.value("id").toUuid());
         w->setName(items[w->id()]->name());
 
-        ret[w->id()] = w;
+        m_weapon[w->id()] = w;
     }
 
-    return ret;
+    QMap<QUuid, WeaponPointer> ret;
+    for(auto it: ids)
+        ret[it] = m_weapon[it];
+
+    return ids.isEmpty() ? m_weapon : ret;
 }
 
 bool SqlDataBase::removeWeapon(WeaponPointer w)
 {
+    m_weapon.remove(w->id());
+
     return removeItem(w);
 }
 
@@ -374,6 +398,7 @@ bool SqlDataBase::updateWeapon(WeaponPointer w)
 bool SqlDataBase::addWeapon(WeaponPointer w)
 {
     bool ret = addItem(w);
+    m_weapon[w->id()] = w;
 
     if(!ret)
         return ret;

@@ -21,6 +21,11 @@ private:
     QSqlDatabase m_db;
     QMap<QString, QSqlQuery> m_queries;
 
+    QMap<QUuid, RulePointer> m_rules;
+    QMap<QUuid, ObjectPointer> m_item;
+    QMap<QUuid, CreaturePointer> m_creatures;
+    QMap<QUuid, WeaponPointer> m_weapon;
+
 public:
     SqlDataBase();
     ~SqlDataBase();
