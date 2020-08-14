@@ -29,12 +29,6 @@ private slots:
     void initTestCase();
     void test_init();
 
-    void test_addCreature();
-    void test_selectAllCreature();
-    void test_selectOneCreature();
-    void test_updateCreature();
-    void test_removeCreature();
-
     void test_addRule();
     void test_selectAllRule();
     void test_selectOneRule();
@@ -53,6 +47,11 @@ private slots:
     void test_updateWeapon();
     void test_removeWeapon();
 
+    void test_addCreature();
+    void test_selectAllCreature();
+    void test_selectOneCreature();
+    void test_updateCreature();
+    void test_removeCreature();
 
     void cleanupTestCase();
 };
