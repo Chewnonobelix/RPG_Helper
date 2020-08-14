@@ -43,6 +43,7 @@ public:
 
 signals:
     void s_name(QString);
+    void s_metadata(QString, QString);
 };
 
 typedef QSharedPointer<AbstractObject> ObjectPointer;

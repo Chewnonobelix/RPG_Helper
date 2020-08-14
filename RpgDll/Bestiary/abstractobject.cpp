@@ -56,23 +56,26 @@ AbstractObject& AbstractObject::operator =(const AbstractObject& ao)
 
 void AbstractObject::setMetadata(QString key, QString value)
 {
-    //    QSet<QString> keys;
-    //    keys<<"description"<<"name"<<"id";
-    //    if(keys.contains(key))
-    //        return;
+        QSet<QString> keys;
+        keys<<"name"<<"id";
+        if(keys.contains(key))
+            return;
 
-    //    MetaData::setMetadata(key, value);
-    //    emit s_metadata(key, value);
+        MetaData::setMetadata(key, value);
+        emit s_metadata(key, value);
 }
 
-QString AbstractObject::metaData(QString) const
+QString AbstractObject::metaData(QString key) const
 {
-    return QString();
+    return MetaData::metaData<QString>(key);
 }
 
 QStringList AbstractObject::metadataList() const
 {
-    return QStringList();
+    QStringList ret = MetaData::metadataList();
+    ret.removeAll("id");
+    ret.removeAll("name");
+    return ret;
 }
 
 class GenericObject: public AbstractObject
