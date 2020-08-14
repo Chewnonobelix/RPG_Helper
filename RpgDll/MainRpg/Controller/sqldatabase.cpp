@@ -81,6 +81,7 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
 
         carac.bindValue(":id", c->id());
 
+        carac.exec();
         while(carac.next())
             c->setCharacteristics(carac.value("name").toString(), carac.value("value").toDouble());
 
@@ -117,6 +118,11 @@ bool SqlDataBase::updateCreature(CreaturePointer c)
     req.bindValue(":id", c->id());
 
     bool ret = req.exec();
+
+    ret &= insertCaracteristic(c);
+
+    ret &= insertAssociation(c);
+
     return ret;
 }
 
@@ -126,8 +132,6 @@ bool SqlDataBase::addCreature(CreaturePointer c)
         c->setId(QUuid::createUuid());
 
     auto& insertCreat = m_queries["insertCreature"];
-    auto& insertCarac = m_queries["insertCreatureCarac"];
-    auto& insertAssoc = m_queries["insertCreatureAssociation"];
 
     insertCreat.bindValue(":id", c->id());
     insertCreat.bindValue(":race", c->race());
@@ -140,18 +144,40 @@ bool SqlDataBase::addCreature(CreaturePointer c)
         return false;
     }
 
+    if(!insertCaracteristic(c))
+        return false;
+
+    if(!insertAssociation(c))
+        return false;
+
+    return true;
+}
+
+bool SqlDataBase::insertAssociation(CreaturePointer c)
+{
+    auto& insertAssoc = m_queries["insertCreatureAssociation"];
+    bool ret = true;
+
+    return ret;
+}
+
+bool SqlDataBase::insertCaracteristic(CreaturePointer c)
+{
+    bool ret = true;
+    auto& insertCarac = m_queries["insertCreatureCarac"];
+
     for(auto it: c->characteristicsList())
     {
         insertCarac.bindValue(":id", c->id());
         insertCarac.bindValue(":name", it);
         insertCarac.bindValue(":value", c->characteristics(it));
 
-        if(!insertCarac.exec())
+        if(!(ret = insertCarac.exec()))
             qDebug()<<"Insert carac"<<insertCarac.boundValues()<<insertCarac.lastError();
 
     }
 
-    return true;
+    return ret;
 }
 
 QMap<QUuid, RulePointer> SqlDataBase::selectRule(QList<QUuid> ids)
