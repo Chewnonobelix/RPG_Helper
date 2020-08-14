@@ -70,7 +70,7 @@ void TestBonus::test_metadata()
     model->setMetadata(metaKey1, metaValue1);
     QCOMPARE(model->metaData(metaKey1), metaValue1);
     QCOMPARE(spy.count(), 1);
-    model->setMetadata("descripton", metaValue1);
+    model->setMetadata("name", metaValue1);
     QCOMPARE(spy.count(), 1);
     QCOMPARE(model->metadataList(), {metaKey1});
 }
