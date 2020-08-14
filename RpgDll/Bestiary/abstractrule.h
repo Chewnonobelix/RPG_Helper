@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QUuid>
+#include <QSet>
 #include <QSharedPointer>
 #include "Bestiary_global.h"
 #include "metadata.h"
@@ -36,9 +37,9 @@ public:
     QString description() const;
     void setDescription(QString);
     
-    virtual void setMetadata(QString , QString );
-    virtual QString metaData(QString) const;
-    virtual QStringList metadataList() const;
+    Q_INVOKABLE virtual void setMetadata(QString , QString );
+    Q_INVOKABLE virtual QString metaData(QString) const;
+    Q_INVOKABLE virtual QStringList metadataList() const;
 
 signals:
     void s_name(QString);

@@ -2,8 +2,8 @@
 
 AbstractRule::AbstractRule() : QObject(nullptr)
 {
-	setId(QUuid());
-	setName(QString());
+    setId(QUuid());
+    setName(QString());
 }
 
 AbstractRule::AbstractRule(const AbstractRule& ab): QObject(nullptr), MetaData(ab)
@@ -61,23 +61,27 @@ void AbstractRule::setDescription(QString d)
 
 void AbstractRule::setMetadata(QString key, QString value)
 {
-//    QSet<QString> keys;
-//    keys<<"description"<<"name"<<"id";
-//    if(keys.contains(key))
-//        return;
+    QSet<QString> keys;
+    keys<<"description"<<"name"<<"id";
+    if(keys.contains(key))
+        return;
 
-//    MetaData::setMetadata(key, value);
-//    emit s_metadata(key, value);
+    MetaData::setMetadata(key, value);
+    emit s_metadata(key, value);
 }
 
-QString AbstractRule::metaData(QString) const
+QString AbstractRule::metaData(QString key) const
 {
-    return QString();
+    return MetaData::metaData<QString>(key);
 }
 
 QStringList AbstractRule::metadataList() const
 {
-    return QStringList();
+    QStringList ret = MetaData::metadataList();
+    ret.removeAll("id");
+    ret.removeAll("name");
+    ret.removeAll("description");
+    return ret;
 }
 
 class GenericRule: public AbstractRule

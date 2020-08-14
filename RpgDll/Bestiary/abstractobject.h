@@ -37,9 +37,9 @@ public:
     QString name() const;
     void setName(const QString &name);
 
-    virtual void setMetadata(QString , QString );
-    virtual QString metaData(QString) const;
-    virtual QStringList metadataList() const;
+    Q_INVOKABLE virtual void setMetadata(QString , QString );
+    Q_INVOKABLE virtual QString metaData(QString) const;
+    Q_INVOKABLE virtual QStringList metadataList() const;
 
 signals:
     void s_name(QString);
