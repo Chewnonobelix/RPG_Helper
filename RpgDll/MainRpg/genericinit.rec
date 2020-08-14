@@ -5,7 +5,21 @@
 			CONSTRAINT item_unique UNIQUE(id)
 			)
 	</init>
-	
+
+        <init name="genericitemetada">
+        CREATE TABLE 'item_meta' ('id' TEXT NOT NULL REFERENCES item(id),
+        'key' TEXT NOT NULL,
+        'value' TEXT NOT NULL,
+        CONSTRAINT item_meta_unique UNIQUE(id, key))
+        </init>
+
+        <trigger name="item_delete_trigger">
+        CREATE TRIGGER item_delete_trigger BEFORE DELETE ON item
+        BEGIN
+        DELETE FROM item_meta WHERE id=OLD.id;
+        END;
+        </trigger>
+
 	<init name="genericweapon">
 	CREATE TABLE 'weapon' ('id' TEXT NOT NULL REFERENCES item(id), 
 	'damage' TEXT NOT NULL DEFAULT '')
@@ -25,7 +39,21 @@
 			CONSTRAINT rule_unique UNIQUE(id)
 			)
 	</init>
-	
+
+        <init name="genericrulmetada">
+        CREATE TABLE 'rule_meta' ('id' TEXT NOT NULL REFERENCES rule(id),
+        'key' TEXT NOT NULL,
+        'value' TEXT NOT NULL,
+        CONSTRAINT item_meta_unique UNIQUE(id, key))
+        </init>
+
+        <trigger name="rule_delete_trigger">
+        CREATE TRIGGER rule_delete_trigger BEFORE DELETE ON rule
+        BEGIN
+        DELETE FROM rule_meta WHERE id=OLD.id;
+        END;
+        </trigger>
+
 	<init name="genericcreature">
 	CREATE TABLE 'creature' ('id' TEXT NOT NULL PRIMARY KEY, 
 			'name' TEXT NOT NULL DEFAULT '', 

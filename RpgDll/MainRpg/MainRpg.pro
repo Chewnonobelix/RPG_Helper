@@ -37,5 +37,6 @@ INCLUDEPATH += $${PWD}/../Bestiary
 LIBS += -L$$OUT_PWD/../Bestiary/$$FINALDIR -lBestiary
 
 DISTFILES += \
-    View/Main.qml
+    View/Main.qml \
+    genericinit.rec
 
