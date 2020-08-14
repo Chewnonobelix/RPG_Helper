@@ -38,6 +38,7 @@
 	<init name="creature_association">
 		CREATE TABLE creature_association (
 		'id' TEXT NOT NULL REFERENCES creature(id), 
+		'typeName' TEST NOT NULL, 
 		'item' TEXT DEFAULT NULL REFERENCES item(id), 
 		'weapon' TEXT DEFAULT NULL REFERENCES weapon(id), 
 		'rule' TEXT DEFAULT NULL REFERENCES rule(id)
@@ -93,8 +94,8 @@
 	</request>
 	
 	<request name="insertCreatureAssociation">
-	INSERT INTO creature_association (id, item, weapon, rule) 
-	VALUES (:id, :item, :weapon, :rule) 
+	INSERT INTO creature_association (id, typeName, item, weapon, rule) 
+	VALUES (:id, :typeName, :item, :weapon, :rule) 
 	</request>
 	
 	<request name="insertCreatureCarac">
