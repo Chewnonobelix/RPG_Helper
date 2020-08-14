@@ -86,15 +86,25 @@ QMap<QUuid, CreaturePointer> SqlDataBase::selectCreature(QList<QUuid> ids)
             c->setCharacteristics(carac.value("name").toString(), carac.value("value").toDouble());
 
         assoc.bindValue(":id", c->id());
+        assoc.exec();
 
         while(assoc.next())
         {
-            if(!assoc.value("item").isNull())
-                qDebug()<<"Load item";
-            if(!assoc.value("rule").isNull())
-                qDebug()<<"Load rule";
-            if(!assoc.value("item").isNull())
-                qDebug()<<"Load weapon";
+            if(!assoc.value("item").toString().isEmpty())
+            {
+                auto i = selectItem({assoc.value("item").toUuid()}).first();
+                c->setItem(assoc.value("typeName").toString(), i);
+            }
+            if(!assoc.value("rule").toString().isEmpty())
+            {
+                auto i = selectRule({assoc.value("rule").toUuid()}).first();
+                c->setRule(assoc.value("typeName").toString(), i);
+            }
+            if(!assoc.value("weapon").toString().isEmpty())
+            {
+                auto i = selectWeapon({assoc.value("weapon").toUuid()}).first();
+                c->setWeapon(i);
+            }
         }
     }
 
