@@ -48,12 +48,21 @@
 		CREATE TABLE creature_carac (
 		'id' TEXT NOT NULL REFERENCES creature(id), 
 		'name' TEXT NOT NULL, 
-		'value' DOUBLE NOT NULL 
+		'value' DOUBLE NOT NULL, 
+		CONSTRAINT carac_unique UNIQUE(id, name)
 		)
 	</init>
 	
 	<trigger name="delete_creature">
 	CREATE TRIGGER delete_creature BEFORE DELETE ON creature 
+	BEGIN 
+	DELETE FROM creature_association WHERE id=OLD.id;
+	DELETE FROM creature_carac WHERE id=OLD.id;
+	END;
+	</trigger>
+
+	<trigger name="update_creature">
+	CREATE TRIGGER update_creature BEFORE UPDATE ON creature 
 	BEGIN 
 	DELETE FROM creature_association WHERE id=OLD.id;
 	DELETE FROM creature_carac WHERE id=OLD.id;
@@ -77,19 +86,7 @@
 	SET name=:name, description=:description, race=:race 
 	WHERE id=:id 
 	</request>
-	
-	<request name="updateCreatureAssociation">
-	UPDATE creature_association
-	SET item=:item, weapon=:weapon, rule=:rule  
-	WHERE id=:id 
-	</request>
-	
-	<request name="updateCreatureCarac">
-	UPDATE creature_carac
-	SET value=:value  
-	WHERE id=:id AND name=:name 
-	</request>
-	
+		
 	<request name="insertCreature">
 	INSERT INTO creature (id, name, race, description) 
 	VALUES (:id, :name, :race, :description) 
