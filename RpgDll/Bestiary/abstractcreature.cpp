@@ -118,12 +118,16 @@ void AbstractCreature::setItem(QString name, ObjectPointer obj)
 }
 
 QSet<WeaponPointer> AbstractCreature::weapons() const
-{
-    return QSet<WeaponPointer>();
+{   
+    return metaData<QVariant>("weapon").value<QSet<WeaponPointer>>();
 }
-void AbstractCreature::setWeapon(WeaponPointer)
-{
 
+void AbstractCreature::setWeapon(WeaponPointer w)
+{
+    auto s = metaData<QVariant>("weapon").value<QSet<WeaponPointer>>();
+    s<<w;
+
+    setMetadata("weapon", QVariant::fromValue(s));
 }
 
 
