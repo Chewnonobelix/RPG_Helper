@@ -12,6 +12,7 @@ class MAINRPG_EXPORT MainController : public AbstractController
     Q_OBJECT
 private:
     QQmlApplicationEngine m_engine;
+    CreaturePointer c = AbstractCreature::createGeneric();
 
 public:
     MainController();

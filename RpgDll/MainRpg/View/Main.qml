@@ -9,4 +9,10 @@ ApplicationWindow {
 
     width: 800
     height: 640
+
+    PnjView {
+        id: pnj
+        objectName: "pnj"
+        anchors.fill: parent
+    }
 }
