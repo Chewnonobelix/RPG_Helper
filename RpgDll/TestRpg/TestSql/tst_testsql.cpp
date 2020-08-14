@@ -137,9 +137,16 @@ void TestSql::test_updateCreature()
 {
     c2->setName(name+"1");
     c2->setCharacteristics(carac1, value1+2);
+    c2->setRule("testrule", r1);
+    c2->setItem("testitem", o1);
+    c2->setWeapon(w1);
     QCOMPARE(model->updateCreature(c2), true);
     QCOMPARE(model->selectCreature({c2->id()}).first()->name(), name+"1");
     QCOMPARE(model->selectCreature({c2->id()}).first()->characteristics(carac1), value1+2);
+
+    QCOMPARE(model->selectCreature({c2->id()}).first()->ruleSet("testrule"), {r1});
+    QCOMPARE(model->selectCreature({c2->id()}).first()->itemSet("testitem"), {o2});
+    QCOMPARE(model->selectCreature({c2->id()}).first()->weapons(), {w1});
 }
 
 void TestSql::test_removeCreature()
