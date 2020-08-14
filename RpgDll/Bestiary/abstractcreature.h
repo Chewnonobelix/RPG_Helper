@@ -52,6 +52,8 @@ public:
     QStringList itemTypeList() const;
     Q_INVOKABLE QSet<ObjectPointer> itemSet(QString) const;
     void setItem(QString, ObjectPointer);
+    QSet<WeaponPointer> weapons() const;
+    void setWeapon(WeaponPointer);
 
     QStringList ruleTypeList() const;
     Q_INVOKABLE QSet<RulePointer> ruleSet(QString) const;

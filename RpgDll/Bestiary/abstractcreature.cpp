@@ -117,6 +117,16 @@ void AbstractCreature::setItem(QString name, ObjectPointer obj)
     emit s_object(name, obj);
 }
 
+QSet<WeaponPointer> AbstractCreature::weapons() const
+{
+    return QSet<WeaponPointer>();
+}
+void AbstractCreature::setWeapon(WeaponPointer)
+{
+
+}
+
+
 QStringList AbstractCreature::ruleTypeList() const
 {
     auto map = metaData<QVariant>("rule").toMap();
