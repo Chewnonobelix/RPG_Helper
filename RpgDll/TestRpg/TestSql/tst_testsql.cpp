@@ -18,6 +18,9 @@ private:
     const QString race = "race1";
     const QString damage = "race1";
 
+    const QString carac1 = "C1", carac2 = "C2";
+    const double value1 = 3.2, value2 = 6.3;
+
 public:
     TestSql();
     ~TestSql();
@@ -69,6 +72,10 @@ void TestSql::initTestCase()
     c2->setName(name);
     c2->setRace(race);
     c2->setDescription(description);
+    c1->setCharacteristics(carac1, value1);
+    c1->setCharacteristics(carac2, value2);
+    c2->setCharacteristics(carac1, value1);
+    c2->setCharacteristics(carac2, value2);
 
     r1->setName(name);
     r1->setDescription(description);
@@ -130,8 +137,10 @@ void TestSql::test_selectOneCreature()
 void TestSql::test_updateCreature()
 {
     c2->setName(name+"1");
+    c2->setCharacteristics(carac1, value1+2);
     QCOMPARE(model->updateCreature(c2), true);
     QCOMPARE(model->selectCreature({c2->id()}).first()->name(), name+"1");
+    QCOMPARE(model->selectCreature({c2->id()}).first()->characteristics(carac1), value1+2);
 }
 
 void TestSql::test_removeCreature()
