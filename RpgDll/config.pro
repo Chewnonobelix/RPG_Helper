@@ -16,3 +16,5 @@ LIBS += -L$$OUT_PWD/../../DesignLibrary/DesignPattern/$$FINALDIR -lDesignPattern
 CONFIG += c++17
 
 QT += quick sql core xml widgets charts qml gui xmlpatterns network
+
+DEFINES += QT_SHAREDPOINTER_TRACK_POINTERS;

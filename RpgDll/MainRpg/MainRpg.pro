@@ -16,11 +16,13 @@ DEFINES += QT_DEPRECATED_WARNINGS REQFILE=\\\"$$PWD/genericinit.rec\\\"
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    Controller/GenericBestiaryController.cpp \
     Controller/abstractcontroller.cpp \
     Controller/maincontroller.cpp \
     Controller/sqldatabase.cpp
 
 HEADERS += \
+    Controller/GenericBestiaryController.h \
     Controller/abstractcontroller.h \
     Controller/interfacedatasave.h \
     Controller/maincontroller.h \

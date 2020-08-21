@@ -9,9 +9,6 @@ MainController::MainController()
     qmlRegisterUncreatableType<AbstractWeapon>("Bestiary.Generic", 1, 0, "AbstractWeapon", "Abstract type");
 
     m_engine.load(QUrl("qrc:/Main.qml"));
-    auto root = m_engine.rootObjects().first();
-    QObject* pnj = root->findChild<QObject*>("pnj");
-    pnj->setProperty("model", QVariant::fromValue(c.data()));
 }
 
 MainController::~MainController()
